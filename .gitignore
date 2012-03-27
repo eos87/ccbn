@@ -1,0 +1,5 @@
+*.py~
+*.html~
+*.css~
+*.pyc
+settings_local.py
