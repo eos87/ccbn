@@ -1,0 +1,7 @@
+.field-con_quien_vive .help, #modulopersona-0 .help{
+    display: none;
+}
+.field-con_quien_vive ul li, #modulopersona-0 ul li{
+    float: left;
+    list-style: none !important;
+}
