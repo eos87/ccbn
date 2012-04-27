@@ -180,22 +180,22 @@ class Relacion(models.Model):
             new_rel.save()
 
 class ModuloPersona(models.Model):
-    formacion = models.ManyToManyField(SubModulo, related_name='formacion', 
-                                       limit_choices_to = {'parent_module__code': 'module1'})
-    atencion_integral = models.ManyToManyField(SubModulo, related_name='atencion_integral', 
-                                                limit_choices_to = {'parent_module__code': 'module2'})
-    biblioteca = models.ManyToManyField(SubModulo, related_name='biblioteca',
+    biblioteca = models.ManyToManyField(SubModulo, related_name='biblioteca', blank=True, null=True,
                                          limit_choices_to = {'parent_module__code': 'module3'})
-    promocion_artistica = models.ManyToManyField(SubModulo, related_name='promocion_artistica', 
+    formacion = models.ManyToManyField(SubModulo, related_name='formacion', blank=True, null=True,
+                                       limit_choices_to = {'parent_module__code': 'module1'})
+    atencion_integral = models.ManyToManyField(SubModulo, related_name='atencion_integral', blank=True, null=True,
+                                                limit_choices_to = {'parent_module__code': 'module2'})
+    promocion_artistica = models.ManyToManyField(SubModulo, related_name='promocion_artistica', blank=True, null=True,
                                                   limit_choices_to = {'parent_module__code': 'module4'})
     pv_interna = models.ManyToManyField(SubModulo, related_name='pv_interna',  limit_choices_to = {'parent_module__code': 'module5'},
-                                        verbose_name = u'Prevención de Violencia Interna')
+                                        verbose_name = u'Prevención de Violencia Interna', blank=True, null=True,)
     pv_externa = models.ManyToManyField(SubModulo, related_name='pv_externa',  limit_choices_to = {'parent_module__code': 'module6'},
-                                        verbose_name = u'Prevención de Violencia Externa')
+                                        verbose_name = u'Prevención de Violencia Externa', blank=True, null=True,)
     persona = models.OneToOneField(Persona)
 
     def __unicode__(self):
-        return u'%s' % self.persona.__unicode__
+        return u'%s' % self.id
 
 CHOICE_PORQUE_NO = ((1, u'No tiene interés'),
                     (2, u'Está trabajando'),
@@ -211,7 +211,7 @@ class InscripcionCurso(models.Model):
     persona = models.ForeignKey(Persona)
     curso = models.ForeignKey(Curso)
     becado = models.IntegerField(choices=((1, u'Si'), (2, 'No')))
-    fecha = models.DateTimeField(verbose_name = u'Fecha de inscripcion', default=datetime.datetime.now())
+    fecha = models.DateField(verbose_name = u'Fecha de inscripcion', default=datetime.date.today())
     estado = models.IntegerField(verbose_name = u'Estado en curso', help_text='20%, 30%', blank=True, null=True)
     xq_no_termino = models.IntegerField(choices=CHOICE_PORQUE_NO, verbose_name = u'Porque no termino',
                                         blank=True, null=True)
@@ -221,8 +221,95 @@ class InscripcionCurso(models.Model):
     calidad_contenido = models.IntegerField(blank=True, null=True)  # TODO: recordar que contenido va aca
     metodologia = models.IntegerField(blank=True, null=True)        # TODO: recordar contenido
 
+    # solo para uso del sistema
+    date_time = models.DateTimeField(auto_now_add=True)
+
+    def __unicode__(self):
+        return ''
+
+    class Meta:
+        verbose_name_plural = u'Inscripciones Cursos'
+
+# Registro en Biblioteca, solo una vez
+class RegistroBiblioteca(models.Model):
+    fecha = models.DateField(default=datetime.date.today(), verbose_name = u'Fecha de registro')
+    persona = models.OneToOneField(Persona)
+
     def __unicode__(self):
         return u'%s' % self.id
 
     class Meta:
-        verbose_name_plural = u'Inscripciones Cursos'
+        verbose_name_plural = u'Registros Biblioteca'
+
+class BaseRegistroAnual(models.Model):
+    persona = models.ForeignKey(Persona)
+    fecha = models.DateField(default=datetime.date.today(), verbose_name = u'Fecha de registro')    
+
+    def __unicode__(self):
+        return u''
+
+    class Meta:
+        abstract = True
+
+from atencionintegral.models import *
+
+# Modelos de registro de becas, esto es año con año.
+class RegistroBecaPrimaria(BaseRegistroAnual):
+    beca = models.ForeignKey(BecaPrimaria, verbose_name = u'Beca primaria')
+    tutoria = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    rendimiento_academico = models.IntegerField(blank=True, null=True)
+    recibio_suplemento = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    recibio_atencion_psicologica = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    mejoro_habilidades = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    reconoce_capacidad = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    perc_derecho = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = u'Registro Beca Primaria'
+
+class RegistroBecaSecundaria(BaseRegistroAnual):
+    beca = models.ForeignKey(BecaSecundaria, verbose_name = u'Beca secundaria')
+    servicio_social = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    esp_propos = models.IntegerField(blank=True, null=True)
+    promotor = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    solidario_famila = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    solidario_centro = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    solidario_comunidad = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    solidario_sociedad = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = u'Registro Beca Secundaria'
+
+class RegistroBecaUniversitaria(BaseRegistroAnual):
+    beca = models.ForeignKey(BecaUniversitaria, verbose_name = u'Beca universitaria')
+    servicio_social = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    esp_propos = models.IntegerField(blank=True, null=True)
+    promotor = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    solidario_famila = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    solidario_centro = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    solidario_comunidad = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    solidario_sociedad = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)    
+
+    class Meta:
+        verbose_name_plural = u'Registro Beca Universitaria'
+
+# Modelos de registro en promocion artistica
+class RegistroMusica(BaseRegistroAnual):
+    class Meta:
+        verbose_name_plural = u'Registro Grupo de Musica'
+
+class RegistroTeatro(BaseRegistroAnual):
+    class Meta:
+        verbose_name_plural = u'Registro Grupo de Musica'
+
+class RegistroDanza(BaseRegistroAnual):
+    class Meta:
+        verbose_name_plural = u'Registro Grupo de Danza'
+
+class RegistroCoro(BaseRegistroAnual):
+    class Meta:
+        verbose_name_plural = u'Registro Grupo de Coro'
+
+class RegistroPintura(BaseRegistroAnual):
+    class Meta:
+        verbose_name_plural = u'Registro Grupo de Pintura'

@@ -22,7 +22,7 @@ class Curso(models.Model):
 
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
-    submodulo = models.ForeignKey(SubModulo, verbose_name = u'Area')
+    submodulo = models.ForeignKey(SubModulo, verbose_name = u'Area', limit_choices_to = {'parent_module__code': 'module1'})
 
     def __unicode__(self):
         return u'%s - %s - %s - %s' % (self.nombre, self.fecha_inicio.strftime("%d/%m/%Y"), self.frecuencia, self.get_horario_display())

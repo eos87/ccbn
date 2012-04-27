@@ -5,3 +5,33 @@
     float: left;
     list-style: none !important;
 }
+p{margin: 0px !important; padding: 0px !important;}
+.field-persona p{
+    font-size: 13px !important;
+}
+tr[id^="inscripcioncurso_set"] td{
+    padding-top: 1em !important;
+}
+.module h2, .inline-group h2{
+    font-size: 14px !important;
+    text-shadow: 0px 1px 1px #333;
+    -moz-text-shadow: 0px 1px 1px #333;
+    -webkit-text-shadow: 0px 1px 1px #333;
+}
+
+#registrobiblioteca-0 h3{
+    display: none;
+}
+#registrobiblioteca-0 label, #registrobecaprimaria_set-group label,
+#registrobecasecundaria_set-group label, #registrobecauniversitaria_set-group label{
+    width: 11em !important;
+}
+/*#registrobecaprimaria_set-group, #registrobecasecundaria_set-group,
+#registrobecauniversitaria_set-group{
+    width: 33%;    
+    display: inline-block;
+}*/
+
+.inline-group label{
+    width: 11em !important;
+}
