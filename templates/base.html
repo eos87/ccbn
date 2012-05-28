@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8" />
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+	<title>{%block title%}CCBN{%endblock%}</title>
+  <!--[<link type="text/css" rel="stylesheet"  href="/files/css/ccbn.css">-->
+  <link type="text/css" rel="stylesheet"  href="/files/css/reset.css">
+  <link type="text/css" rel="stylesheet"  href="/files/css/960_12_col.css">
+  <link type="text/css" rel="stylesheet"  href="/files/css/text.css">
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <link type="text/css" rel="stylesheet/less" href="/files/css/ccbn.less">
+  <script type="text/javascript" src="/files/js/less.min.js"></script>
+  {%block extra_js%}{%endblock%}
+</head>
+<body>
+{% block header %}
+<div class="container_12">
+  <header id="header">
+    <div class="grid_6">
+      <a href="/"><img src="/files/img/logoheader.png" class="logoheader"></a>
+      <div id="header-title">
+        <b>CENTRO CULTURAL BATAHOLA NORTE</b><br>
+        Sistema para el monitoreo de avances de indicadores
+      </div>
+    </div>
+    <div class="grid_6 line-header">
+    </div>
+    <div class="clear"></div>
+  </header>
+{% endblock %}
+  <div class="contenido">
+    {%block contenido%}{%endblock%}
+  </div>
+{%block footer%}
+  <footer>
+    <div class="grid_12" id="footer">
+        Desarrollado por <a href="http://simas.org.ni">SIMAS</a> bajo plataforma <a href="http://djangoproject.org">Django</a>
+     </div>
+  </footer>
+</div> <!-- Cierra container -->
+{%endblock%}
+</body>
+</html>

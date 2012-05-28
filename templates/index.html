@@ -1,8 +1,36 @@
-{{autor}}
-<div>
-    <form action='.' method='post'>
-        {% csrf_token %}
-        {{formset.as_p}}
-        <input type='submit' value='submit'>
-    </form>
+{% extends "base.html"%}
+
+{%block contenido%}
+<div class="grid_12 formindex">
+	<div class="grid_6 prefix_3 suffix_3 loginform">
+		 <FORM action="." method="post">
+		    <LABEL for="nombre">Nombre: </LABEL>
+		              <INPUT type="text" id="nombre"><BR>
+		    <LABEL for="password">Password: </LABEL>
+		              <INPUT type="password" id="password"><BR>
+		    <INPUT type="submit" value="Enviar">
+		 </FORM>
+	</div>
 </div>
+<div class="grid_3 batahola">
+	<img src="/files/img/fotoindex.jpg">
+	<div class="title-block-index">Centro Cultural Batahola Norte</div>
+	El Centro Cultural Batahola Norte es un centro comunitario que desde 1983 abre un espacio de cultura, educación y capacitación a las mujeres, hombres, jóvenes, niños y niñas de los barrios marginados de Managua, para que logren su auto-determinación. A través de la cultura y la educación integral, se les invita a la gente excluida del poder económico, político y social a que descubran sus derechos humanos, la autoestima y la igualdad.
+</div>
+<div class="grid_6 programa-index">
+</div>
+<div class="grid_3">
+	<div class="title-block-index">Contacto ccbn</div>
+	<p>505-2250-4542 <br>
+correo@centroculturalbatahola.org</p>
+	<div class="title-block-index">Preguntas sobre el sistema</div>
+	<p>
+<b>SIMAS</b><br>
+505-2268-2302<br>
+byron@simas.org.ni<br>
+martha@simas.org.ni<br>
+simas@simas.org.ni<br>
+	</p>
+</div>
+<div class="clear"></div>
+{%endblock%}
