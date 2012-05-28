@@ -1,0 +1,139 @@
+@import "lib_style.less";
+@import "button_theme_standart.less";
+#header{
+	margin-top:15px;
+	margin-bottom:15px;
+	#header-title{
+		font-size:13px;
+		color:#555753;
+		margin-top:4px;
+	}
+	.logoheader{
+		float:left;
+		margin-right:10px;
+	}
+	.line-header{
+		height:45px;
+		background:url(/files/img/line-header.png) repeat-x center left;
+	}
+}
+
+// Index
+.contenido{
+	color:#212526;
+}
+.formindex{
+	background:url(/files/img/formindex.jpg) ;
+	height:325px;
+	border-top:#055f7f 2px solid;
+	margin-bottom:15px;
+}
+
+.loginform{
+	margin-top:250px;
+}
+
+.title-block-index{
+	font-size:13px;
+	font-weight:bold;
+	color:#4a9b1f;
+	margin:10px 0px;
+}
+.batahola{
+	text-align:justify;
+}
+
+.programa-index{
+	height:276px;
+}
+
+.iconindex-contact{
+	padding-left:25px;
+	background:url(/files/img/contactoicon.png) no-repeat center left;
+}
+
+.iconindex-pregunta{
+	padding-left:25px;
+	background:url(/files/img/preguntasicon.png) no-repeat center left;
+}
+
+.info-block{
+	padding-left:25px;
+}
+
+.elemento-login-form{
+	height:55px;
+	margin-right:10px;
+	float:left;
+
+	label{
+		font-size:15px;
+		color:#fff;
+		.text-shadow(0px,1px,0px,#006c8e);
+	}
+
+	input[type="text"],input[type="password"]{
+		.rounded-corners(3px);
+		border:0;
+		font-size:16px;
+		font-family:Arial;
+		color:#737177;
+		border-bottom:#1fdeff 1px solid;
+		.box-shadow(0px,-1px,0px,#253f4f);
+		padding-left:10px;
+		width:165px;
+		height:30px;
+	}
+	input[type="submit"]{
+		margin-top:22px;
+		.bton-standart;
+		height:35px;
+		width:70px;
+	}
+}
+
+.programa-index-label{
+	color:#bfc0bd;
+}
+
+.programa-index-nombre{
+	color:#0893c5;
+	font-weight:bold;
+	margin-bottom:10px;
+}
+
+
+.accordion {
+	background:#fafaf9;
+	a{
+		color:#2e3436;
+		text-decoration:none;
+		padding-left: 30px !important;
+		background:url(/files/img/iconprog.png) no-repeat 10px center;
+		font-weight:bold;
+		&:hover{
+			color:#000;
+		}
+	}
+	.accordion-inner{
+		background:#fff;
+	}
+}
+
+//footer
+
+#footer{
+	color:#888a85;
+	font-size:11px;
+	text-align:right;
+	border-top:#b1b8a9 1px solid;
+	margin-top:15px;
+	padding-top:15px;
+	margin-bottom:15px;
+
+	a{
+		color:#888a85;
+		font-weight:bold;
+		text-decoration:none;
+	}
+}

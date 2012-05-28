@@ -3,3 +3,5 @@
 *.css~
 *.pyc
 settings_local.py
+*.sublime-project
+*.sublime-workspace

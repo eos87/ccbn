@@ -1,8 +1,108 @@
-{{autor}}
-<div>
-    <form action='.' method='post'>
-        {% csrf_token %}
-        {{formset.as_p}}
-        <input type='submit' value='submit'>
-    </form>
+{% extends "base.html"%}
+
+{%block contenido%}
+<div class="grid_12 formindex">
+	<div class="grid_6 prefix_3 suffix_3 loginform">
+		 <form action="." method="post">
+		 	<div class="elemento-login-form">
+			    <label for="nombre">Usuario</label><br>
+			    <input type="text" id="nombre">
+			</div>
+			<div class="elemento-login-form">
+			    <label for="password">Contraseña</label><br>
+			    <input type="password" id="password">
+		    </div>
+		    <div class="elemento-login-form">
+		   		 <input class="btn-custom" type="submit" value="Entrar">
+			</div>
+			<div class="clear"></div>
+		 </form>
+	</div>
 </div>
+<div class="grid_3 batahola">
+	<img src="/files/img/fotoindex.jpg">
+	<div class="title-block-index">Centro Cultural Batahola Norte</div>
+	El Centro Cultural Batahola Norte es un centro comunitario que desde 1983 abre un espacio de cultura, educación y capacitación a las mujeres, hombres, jóvenes, niños y niñas de los barrios marginados de Managua, para que logren su auto-determinación. A través de la cultura y la educación integral, se les invita a la gente excluida del poder económico, político y social a que descubran sus derechos humanos, la autoestima y la igualdad.
+</div>
+<div class="grid_6 programa-index">
+	<div class="programa-index-label">PROGRAMA</div>
+	<div class="programa-index-nombre">Construyendo un nuevo espiritu educativo, artistico y cultural de Nicaragua</div>
+	<div id="accordion2" class="accordion">
+	    <div class="accordion-group">
+	      <div class="accordion-heading">
+	        <a href="#collapseOne" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
+	          Formación
+	        </a>
+	      </div>
+	      <div class="accordion-body collapse" id="collapseOne">
+	        <div class="accordion-inner">
+				Promover una educación integral desde un enfoque de derechos que potencie capacidades básicas, técnicas, artísticas y humanas de grupos de población vulnerable para que mejoren su calidad de vida, según sus necesidades prácticas e intereses estratégicos de género y generacional
+	        </div>
+	      </div>
+	    </div>
+	    <div class="accordion-group">
+	      <div class="accordion-heading">
+	        <a href="#collapseTwo" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
+	          Educación integral de niños, niñas y adolescentes
+	        </a>
+	      </div>
+	      <div class="accordion-body collapse" id="collapseTwo">
+	        <div class="accordion-inner">
+	          Implementar acciones y promover espacios que faciliten el desarrollo integral de NNA, con un enfoque de compromiso social, en función de sus derechos a la educacin
+	        </div>
+	      </div>
+	    </div>
+	    <div class="accordion-group">
+	      <div class="accordion-heading">
+	        <a href="#collapseThree" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
+	          Promoción Artística y Cultural
+	        </a>
+	      </div>
+	      <div class="accordion-body collapse" id="collapseThree">
+	        <div class="accordion-inner">
+	          Promover el arte y la cultura como derechos y medios para el desarrollo humano
+	        </div>
+	      </div>
+	    </div>
+	    <div class="accordion-group">
+	      <div class="accordion-heading">
+	        <a href="#collapsefour" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
+	          Prevención de violencia basada en género y generacional
+	        </a>
+	      </div>
+	      <div class="accordion-body collapse" id="collapsefour">
+	        <div class="accordion-inner">
+	          Desarrollar procesos de sensibilización y formación con la población atendida para mitigar los factores de riesgo relacionados con la violencia de género y generacional
+	        </div>
+	      </div>
+	    </div>
+	    <div class="accordion-group">
+	      <div class="accordion-heading">
+	        <a href="#collapsefive" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
+	          Fortalecimiento institucional
+	        </a>
+	      </div>
+	      <div class="accordion-body collapse" id="collapsefive">
+	        <div class="accordion-inner">
+	          Fortalecer las capacidades internas de la institución para el funcionamiento satisfactorio de sus programas y el alcance de sus objetivos
+	        </div>
+	      </div>
+	    </div>
+	</div>
+</div>
+<div class="grid_3">
+	<div class="title-block-index  iconindex-contact">Contacto ccbn</div>
+	<p class="info-block">
+		505-2250-4542 <br>
+		correo@centroculturalbatahola.org</p>
+	<div class="title-block-index iconindex-pregunta">Preguntas sobre el sistema</div>
+	<p class="info-block">
+		<b>SIMAS</b><br>
+		505-2268-2302<br>
+		byron@simas.org.ni<br>
+		martha@simas.org.ni<br>
+		simas@simas.org.ni<br>
+	</p>
+</div>
+<div class="clear"></div>
+{%endblock%}
