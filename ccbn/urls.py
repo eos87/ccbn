@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^$', 'registro.views.testing', name='home'),
+    url(r'^index2/', 'registro.views.testing', name='index2'),
     url(r'^loadfields/$', 'ccbn.views.loadfields', name='loadfields'),
     # url(r'^ccbn/', include('ccbn.foo.urls')),
 

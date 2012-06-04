@@ -17,4 +17,4 @@ def testing(request):
     elif salida.tipo_meta == 2: # count
         tipo_meta = query.count()
 
-    return render_to_response('index.html', RequestContext(request, locals()))
+    return render_to_response('index2.html', RequestContext(request, locals()))
