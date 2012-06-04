@@ -6,7 +6,8 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'registro.views.testing', name='home'),
+    url(r'^$', 'registro.views.testing', name='home'),
+    url(r'^loadfields/$', 'ccbn.views.loadfields', name='loadfields'),
     # url(r'^ccbn/', include('ccbn.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:

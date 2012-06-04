@@ -3,6 +3,7 @@ from django.db import models
 from lugar.models import *
 from sistema.models import *
 from formacion.models import *
+from promocion.models import *
 import datetime
 
 SI_NO_CHOICE = ((1, 'Si'), (2, 'No'))
@@ -91,7 +92,7 @@ class Persona(models.Model):
     primer_apellido = models.CharField(max_length=50)
     segundo_apellido = models.CharField(max_length=50, blank=True, default='')
 
-    codigo = models.IntegerField(help_text=u'Autogenerado por el sistema')
+    codigo = models.IntegerField(help_text=u'Autogenerado por el sistema', default=000)
     sexo = models.IntegerField(choices=((1, 'Masculino'), (2, 'Femenino')))
     fecha_nacimiento = models.DateField()
     cedula = models.CharField(max_length=20, blank=True, default='')
@@ -126,6 +127,11 @@ class Persona(models.Model):
     def __unicode__(self):
         return u'%s %s %s %s' % (self.primer_nombre, self.segundo_nombre, 
                                  self.primer_apellido, self.segundo_apellido)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.codigo = Persona.objects.all().count()
+        super(Persona, self).save(args, kwargs)
 
 # 1: masculino, 2: femenino
 RELACIONES = {
@@ -207,19 +213,29 @@ CHOICE_PORQUE_NO = ((1, u'No tiene interés'),
                     (8, u'Enfermedad'),
                     (9, u'Otros'))
 
+CHOICE_ESTADO_CURSO = ((1, '10 %'), (2, '20 %'), (3, '30%'), (4, '40 %'), (5, '50 %'),
+                       (6, '60 %'), (7, '70 %'), (8, '80 %'), (9, '90 %'), (10, '100 %'))
+CHOICE_CALIFICACION = ((1, 'Paso'), (2, 'Regular'), (3, 'Bien'), (4, 'Excelente'), (5, 'No paso'))
+CHOICE_MEJORA = ((1, 'Bastante'), (2, 'Algo'), (3, 'Poco'), (4, 'Nada'))
+CHOICE_MEJORA_VIDA = ((1, u'Muy útil'), (2, u'Útil'), (3, u'Poco útil'), (4, u'Nada útil'))
+CHOICE_CALIDAD = ((1, 'Excelente'), (2, 'Bueno'), (3, 'Regular'), (4, 'Malo'))
+CHOICE_METODOLOGIA = CHOICE_CALIDAD
+
 class InscripcionCurso(models.Model):
     persona = models.ForeignKey(Persona)
     curso = models.ForeignKey(Curso)
     becado = models.IntegerField(choices=((1, u'Si'), (2, 'No')))
     fecha = models.DateField(verbose_name = u'Fecha de inscripcion', default=datetime.date.today())
-    estado = models.IntegerField(verbose_name = u'Estado en curso', help_text='20%, 30%', blank=True, null=True)
+    estado = models.IntegerField(verbose_name = u'Estado en curso', help_text='20%, 30%', 
+                                 blank=True, null=True, choices=CHOICE_ESTADO_CURSO)
     xq_no_termino = models.IntegerField(choices=CHOICE_PORQUE_NO, verbose_name = u'Porque no termino',
                                         blank=True, null=True)
-    calificacion = models.IntegerField(help_text='Al final del curso', blank=True, null=True)
-    mejora_autoestima = models.IntegerField(blank=True, null=True)  # TODO: integrar choices
-    mejora_vida = models.IntegerField(blank=True, null=True)        # TODO: integrar choices
-    calidad_contenido = models.IntegerField(blank=True, null=True)  # TODO: recordar que contenido va aca
-    metodologia = models.IntegerField(blank=True, null=True)        # TODO: recordar contenido
+    calificacion = models.IntegerField(help_text='Al final del curso', 
+                                       blank=True, null=True, choices=CHOICE_CALIFICACION)
+    mejora_autoestima = models.IntegerField(blank=True, null=True, choices=CHOICE_MEJORA)
+    mejora_vida = models.IntegerField(blank=True, null=True, choices=CHOICE_MEJORA_VIDA)
+    calidad_contenido = models.IntegerField(blank=True, null=True, choices=CHOICE_CALIDAD)
+    metodologia = models.IntegerField(blank=True, null=True, choices=CHOICE_METODOLOGIA)
 
     # solo para uso del sistema
     date_time = models.DateTimeField(auto_now_add=True)
@@ -293,23 +309,45 @@ class RegistroBecaUniversitaria(BaseRegistroAnual):
     class Meta:
         verbose_name_plural = u'Registro Beca Universitaria'
 
+CHOICE_VALORES_CCBN = ((1, 'Avanzado'), (2, 'Iniciado'), (3, 'No Iniciado'))
+
+class BaseRegistroPromocion(BaseRegistroAnual):
+    asistencia = models.IntegerField(blank=True, null=True, choices=CHOICE_ESTADO_CURSO)
+    razon_no_continuar = models.IntegerField(blank=True, null=True, choices=CHOICE_PORQUE_NO)
+    calificacion = models.IntegerField(blank=True, null=True, choices=CHOICE_CALIFICACION)
+    valores_ccbn = models.IntegerField(blank=True, null=True, choices=CHOICE_VALORES_CCBN)
+    genero = models.IntegerField(blank=True, null=True, choices=CHOICE_VALORES_CCBN)
+    mejora_capacidad = models.IntegerField(blank=True, null=True, choices=CHOICE_MEJORA)
+    utilidad_para_vida = models.IntegerField(blank=True, null=True, choices=CHOICE_MEJORA_VIDA)
+    calidad_creativa = models.IntegerField(blank=True, null=True, choices=CHOICE_CALIDAD)
+    metodologia = models.IntegerField(blank=True, null=True, choices=CHOICE_CALIDAD)
+    perspectiva = models.IntegerField(blank=True, null=True, choices=CHOICE_CALIDAD)
+
+    class Meta:
+        abstract = True
+
 # Modelos de registro en promocion artistica
-class RegistroMusica(BaseRegistroAnual):
+class RegistroMusica(BaseRegistroPromocion):
+    grupo = models.ForeignKey(Musica)
     class Meta:
         verbose_name_plural = u'Registro Grupo de Musica'
 
-class RegistroTeatro(BaseRegistroAnual):
+class RegistroTeatro(BaseRegistroPromocion):
+    grupo = models.ForeignKey(Teatro)
     class Meta:
         verbose_name_plural = u'Registro Grupo de Musica'
 
-class RegistroDanza(BaseRegistroAnual):
+class RegistroDanza(BaseRegistroPromocion):
+    grupo = models.ForeignKey(Danza)
     class Meta:
         verbose_name_plural = u'Registro Grupo de Danza'
 
-class RegistroCoro(BaseRegistroAnual):
+class RegistroCoro(BaseRegistroPromocion):
+    grupo = models.ForeignKey(Coro)
     class Meta:
         verbose_name_plural = u'Registro Grupo de Coro'
 
-class RegistroPintura(BaseRegistroAnual):
+class RegistroPintura(BaseRegistroPromocion):
+    grupo = models.ForeignKey(Pintura)
     class Meta:
         verbose_name_plural = u'Registro Grupo de Pintura'
