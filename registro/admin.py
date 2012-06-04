@@ -63,7 +63,7 @@ class FormacionVocacionalInline(admin.TabularInline):
 
         if not self.has_change_permission(request):
             queryset = queryset.none()
-        return queryset 
+        return queryset
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         # override para sobreescribir el form field y agregar la clase CSS chozen
@@ -120,29 +120,28 @@ class RegistroBecaUniversitariaInline(admin.TabularInline):
     verbose_name_plural = u'Registro Beca Universitaria'
 
 # Inlines de registro en grupos musicales
-class RegistroMusicaInline(admin.StackedInline):
-    model = RegistroMusica
+class BasePromocionInline(admin.TabularInline):
+    fields = ['fecha', 'grupo']
     extra = 1
+
+class RegistroMusicaInline(BasePromocionInline):
+    model = RegistroMusica    
     verbose_name_plural = u'Registro grupo de musica'
 
-class RegistroTeatroInline(admin.StackedInline):
+class RegistroTeatroInline(BasePromocionInline):
     model = RegistroTeatro
-    extra = 1
     verbose_name_plural = u'Registro grupo de teatro'
 
-class RegistroDanzaInline(admin.StackedInline):
+class RegistroDanzaInline(BasePromocionInline):
     model = RegistroDanza
-    extra = 1
     verbose_name_plural = u'Registro grupo de danza'
 
-class RegistroCoroInline(admin.StackedInline):
+class RegistroCoroInline(BasePromocionInline):
     model = RegistroCoro
-    extra = 1
     verbose_name_plural = u'Registro grupo de coro'
 
-class RegistroPinturaInline(admin.StackedInline):
+class RegistroPinturaInline(BasePromocionInline):
     model = RegistroPintura
-    extra = 1
     verbose_name_plural = u'Registro grupo de pintura'
 
 class PersonaAdmin(admin.ModelAdmin):
@@ -163,6 +162,7 @@ class PersonaAdmin(admin.ModelAdmin):
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
+    readonly_fields = ('codigo', )
     def response_add(self, request, obj):
         return super(PersonaAdmin, self).response_add(request, obj, '../%s/#laconcha')
 
