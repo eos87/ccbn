@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from ccbn.utils import generate_years_choice
 import datetime
 
 START_YEAR = 2012
-
-def generate_years_choice(start_year):
-    actual_year = datetime.date.today().year
-    return [(year, str(year)) for year in range(start_year, actual_year+1)]
 
 class BaseBeca(models.Model):
     year = models.IntegerField('Año de beca', choices=generate_years_choice(START_YEAR))

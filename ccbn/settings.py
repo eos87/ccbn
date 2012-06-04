@@ -109,7 +109,10 @@ INSTALLED_APPS = (
     'sistema',
     'registro',
     'formacion',
-    'atencionintegral',    
+    'atencionintegral', 
+    'biblioteca',
+    'promocion',
+    'prevencion',
 )
 
 # A sample logging configuration. The only tangible logging

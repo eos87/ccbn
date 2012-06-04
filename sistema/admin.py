@@ -23,3 +23,16 @@ class ModuloAdmin(admin.ModelAdmin):
     pass
 
 admin.site.register(Modulo, ModuloAdmin)
+
+class FilterInline(admin.TabularInline):
+    model = Filter
+    extra = 1
+
+    class Media:
+        js= ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', 
+            '/files/js/query.filters.js']
+
+class SalidaAdmin(admin.ModelAdmin):
+    inlines = [FilterInline, ]
+
+# admin.site.register(Salida, SalidaAdmin)
