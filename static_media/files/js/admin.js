@@ -1,6 +1,6 @@
 (function($){
     $(document).ready(function(){
-        $('#id_municipio, #id_persona, select[id$="libro"]').chosen();
+        $('#id_municipio, #id_persona, select[id$="libro"], select[id$="persona"]').chosen();
         $('.chozen').not(':hidden').chosen();
         
         $('.add-row td a').click(function(){
