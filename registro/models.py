@@ -27,28 +27,36 @@ NIVEL_ACADEMICO_CHOICE = ((1, u'Pre-escolar'),
                           (10, u'Universidad imcompleta'),
                           (11, u'Universidad completa'),
                           (99, u'Ninguno'))
-NIVEL_ESTUDIO_CHOICE = ((1, u'1er Grado'),
-                        (2, u'2do Grado'),
-                        (3, u'3er Grado'),
-                        (4, u'4to Grado'),
-                        (5, u'5to Grado'),
-                        (6, u'6to Grado'),                         
-                        (7, u'1er Año Secundaria'),
-                        (8, u'2do Año Secundaria'),
-                        (9, u'3er Año Secundaria'),
-                        (10, u'4to Año Secundaria'),
-                        (11, u'5to Año Secundaria'),                                                  
-                        (13, u'1er Año Universidad'),
-                        (14, u'2do Año Universidad'),
-                        (15, u'3er Año Universidad'),
-                        (18, u'4to Año Universidad'),
-                        (19, u'5to Año Universidad'),
-                        (16, u'Primaria Aprobada'),
-                        (12, u'Bachiller'),                                                  
-                        (20, u'Graduado Universidad'),                         
-                        (21, u'Técnico/a'),
-                        (17, u'Analfabeta'),
-                        (22, u'Alfabetizado/a'))
+# NIVEL_ESTUDIO_CHOICE = ((1, u'1er Grado'),
+#                         (2, u'2do Grado'),
+#                         (3, u'3er Grado'),
+#                         (4, u'4to Grado'),
+#                         (5, u'5to Grado'),
+#                         (6, u'6to Grado'),                         
+#                         (7, u'1er Año Secundaria'),
+#                         (8, u'2do Año Secundaria'),
+#                         (9, u'3er Año Secundaria'),
+#                         (10, u'4to Año Secundaria'),
+#                         (11, u'5to Año Secundaria'),                                                  
+#                         (13, u'1er Año Universidad'),
+#                         (14, u'2do Año Universidad'),
+#                         (15, u'3er Año Universidad'),
+#                         (18, u'4to Año Universidad'),
+#                         (19, u'5to Año Universidad'),
+#                         (16, u'Primaria Aprobada'),
+#                         (12, u'Bachiller'),                                                  
+#                         (20, u'Graduado Universidad'),                         
+#                         (21, u'Técnico/a'),
+#                         (17, u'Analfabeta'),
+#                         (22, u'Alfabetizado/a'))
+
+NIVEL_ESTUDIO_CHOICE = ((1, u'Alfabetizandose'),
+                        (2, u'Primaria'),
+                        (3, u'Secundaria'),
+                        (4, u'Universidad'),
+                        (5, u'Técnico')
+                        )
+
 JEFE_FAMILIA_CHOICE = ((1, u'Padre'),
                        (2, u'Madre'),
                        (3, u'Abuela'),
@@ -125,12 +133,18 @@ class Persona(models.Model):
     celular = models.CharField(max_length=12, help_text='Telefono celular', blank=True, default='')
 
     nivel_academico = models.IntegerField(choices=NIVEL_ACADEMICO_CHOICE)
-    nivel_estudio = models.IntegerField(choices=NIVEL_ESTUDIO_CHOICE)
+    nivel_estudio = models.IntegerField('Estudio actual', choices=NIVEL_ESTUDIO_CHOICE)
     centro_actual = models.ForeignKey(Colegio, verbose_name = 'Centro de estudio actual', blank=True, null=True)
     oficio = models.ForeignKey(Oficio, blank=True, null=True)
 
     con_quien_vive = models.ManyToManyField(Pariente)
-    tipo_familia = models.IntegerField() # todo: definir con don Falguni los tipos de familia
+    tipo_familia = models.IntegerField(choices=(
+                        (1, u'Nuclear'),
+                        (2, u'Mono parental jefe hombre'),
+                        (3, u'Mono parental jefa mujer'),
+                        (4, u'Extendida'),
+                        (5, u'Ensamblada')
+                            )) # todo: definir con don Falguni los tipos de familia
 
     jefe_familia = models.IntegerField(choices=JEFE_FAMILIA_CHOICE)
     j_primer_nombre = models.CharField(max_length=50, verbose_name = u'primer nombre')
@@ -315,7 +329,7 @@ class RegistroBecaSecundaria(BaseRegistroAnual):
 class RegistroBecaUniversitaria(BaseRegistroAnual):
     beca = models.ForeignKey(BecaUniversitaria, verbose_name = u'Beca universitaria')
     servicio_social = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
-    esp_propos = models.IntegerField(blank=True, null=True)
+    esp_propos = models.IntegerField(choices=SI_NO_CHOICE,blank=True, null=True)
     promotor = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
     solidario_famila = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
     solidario_centro = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
