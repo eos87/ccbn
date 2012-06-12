@@ -30,7 +30,7 @@ class EventoColectivaFormacionAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['lugar',('fecha', 'actividad'),]}),
         ('Participantes', {'fields': [('participantes','ninos', 'ninas', 'jovenes_hombres'), ('jovenes_mujeres', 'adultos_hombres', 'adultos_mujeres')]}),
-        ('Otros datos', {'fields': ['sensibilizacion', 'apropiacion','foto', 'comentarios', 'acuerdos']})
+        ('Otros datos', {'fields': [('sensibilizacion', 'apropiacion'),'foto', 'comentarios', 'acuerdos']})
     ]
 
 admin.site.register(Curso, CursoAdmin)
