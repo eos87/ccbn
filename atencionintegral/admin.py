@@ -46,3 +46,4 @@ class BecaUniversitariaAdmin(admin.ModelAdmin):
     inlines = [BecadosUniversitariosInline, ]
 
 admin.site.register(BecaUniversitaria, BecaUniversitariaAdmin)
+admin.site.register(ActividadEvento)

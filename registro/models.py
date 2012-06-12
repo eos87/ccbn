@@ -226,7 +226,8 @@ CHOICE_PORQUE_NO = ((1, u'No tiene interés'),
                     (6, u'Migro de municipio'),
                     (7, u'Fallecimiento'),
                     (8, u'Enfermedad'),
-                    (9, u'Otros'))
+                    (9, u'Otros'),
+                    (10, u'Si termino'))
 
 CHOICE_ESTADO_CURSO = ((1, '10 %'), (2, '20 %'), (3, '30%'), (4, '40 %'), (5, '50 %'),
                        (6, '60 %'), (7, '70 %'), (8, '80 %'), (9, '90 %'), (10, '100 %'))

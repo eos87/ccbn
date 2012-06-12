@@ -1,5 +1,11 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from sistema.models import SubModulo
+#from promocion.models import CHOICE_APROPIACION, CHOICE_SENSIBILIZACION
+
+CHOICE_SENSIBILIZACION = ((1, 'Democracia'), (2, 'Participacion Ciudadana'), (3, 'Equidad de genero'),
+                          (4, 'Medio ambiente'), (5, 'Derechos Humanos'), (6, 'Solidaridad'))
+CHOICE_APROPIACION = ((1, 'Excelente'), (2, 'Buena'), (3, 'Regular'), (4, 'Mala'))
 
 CHOICE_HORARIO = ((1, u'Matutino'), 
                   (2, u'Vespertino'),
@@ -29,3 +35,39 @@ class Curso(models.Model):
 
     class Meta:
         verbose_name_plural = u'Cursos'
+
+class ActividadEvento(models.Model):
+    nombre = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.nombre
+    class Meta:
+        verbose_name_plural = "Tipo de actividad"
+
+class EventoColectivo(models.Model):
+    fecha = models.DateTimeField()
+    lugar = models.CharField(max_length=200)
+    actividad = models.ForeignKey(ActividadEvento, verbose_name="Actividad")
+
+    participantes = models.IntegerField(default=0)
+    ninos = models.IntegerField(default=0)
+    ninas = models.IntegerField(default=0)
+    jovenes_hombres = models.IntegerField(default=0)
+    jovenes_mujeres = models.IntegerField(default=0)
+    adultos_hombres = models.IntegerField(default=0)
+    adultos_mujeres = models.IntegerField(default=0)
+
+    sensibilizacion = models.IntegerField(verbose_name = u'Sensibilización del tema social',
+                                          choices=CHOICE_SENSIBILIZACION,
+                                          blank=True, null=True)
+    apropiacion = models.IntegerField(choices=CHOICE_APROPIACION)
+
+    foto = models.ImageField(upload_to='biblioteca/activ_colectiva/', blank=True, null=True)
+    comentarios = models.TextField(blank=True, default='')
+    acuerdos = models.TextField(blank=True, default='')
+
+    def __unicode__(self):
+        return u'%s %s' % (self.actividad, self.fecha)
+
+    class Meta:
+        verbose_name_plural = u'Eventos Colectivos de formación'

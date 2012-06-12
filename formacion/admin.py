@@ -4,6 +4,7 @@ from registro.models import InscripcionCurso
 from models import *
 
 admin.site.register(Frecuencia)
+admin.site.register(EventoColectivo)
 
 class InscripcionCursoInline(admin.TabularInline):
     verbose_name_plural = u'Personas inscritas en el curso'
@@ -27,3 +28,4 @@ class CursoAdmin(admin.ModelAdmin):
     inlines = [InscripcionCursoInline, ]
 
 admin.site.register(Curso, CursoAdmin)
+admin.site.register(ActividadEvento)
