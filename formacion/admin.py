@@ -4,7 +4,6 @@ from registro.models import InscripcionCurso
 from models import *
 
 admin.site.register(Frecuencia)
-admin.site.register(EventoColectivo)
 
 class InscripcionCursoInline(admin.TabularInline):
     verbose_name_plural = u'Personas inscritas en el curso'
@@ -27,5 +26,13 @@ class CursoAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'submodulo', 'frecuencia', 'horario', 'fecha_inicio', 'fecha_fin']
     inlines = [InscripcionCursoInline, ]
 
+class EventoColectivaFormacionAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (None, {'fields': ['lugar',('fecha', 'actividad'),]}),
+        ('Participantes', {'fields': [('participantes','ninos', 'ninas', 'jovenes_hombres'), ('jovenes_mujeres', 'adultos_hombres', 'adultos_mujeres')]}),
+        ('Otros datos', {'fields': ['sensibilizacion', 'apropiacion','foto', 'comentarios', 'acuerdos']})
+    ]
+
 admin.site.register(Curso, CursoAdmin)
 admin.site.register(ActividadEvento)
+admin.site.register(EventoColectivo, EventoColectivaFormacionAdmin)
