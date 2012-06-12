@@ -145,6 +145,10 @@ class RegistroPinturaInline(BasePromocionInline):
     verbose_name_plural = u'Registro grupo de pintura'
 
 class PersonaAdmin(admin.ModelAdmin):
+    list_filter = ['barrio','ciudad']
+    search_fields = ['primer_nombre','primer_apellido']
+    list_display = ['__unicode__','fecha_nacimiento','sexo','municipio',
+                    'ciudad','barrio','distrito']
     add_form_template = 'admin/registro/add_form_template.html'
     fieldsets = [
         ('Datos personales', {'fields': [('primer_nombre', 'segundo_nombre'), ('primer_apellido', 'segundo_apellido'), 
