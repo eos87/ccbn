@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
+from smart_selects.db_fields import ChainedForeignKey 
 from lugar.models import *
 from sistema.models import *
 from formacion.models import *
@@ -100,9 +101,23 @@ class Persona(models.Model):
     personal_ccbn = models.IntegerField(choices=SI_NO_CHOICE)
     docente_ccbn = models.IntegerField(choices=SI_NO_CHOICE)
 
+    
     municipio = models.ForeignKey(Municipio)
-    ciudad = models.ForeignKey(Ciudad)
-    barrio = models.ForeignKey(Barrio)
+    ciudad = ChainedForeignKey(
+        Ciudad, 
+        chained_field="municipio",
+        chained_model_field="municipio", 
+        show_all=False, 
+        auto_choose=True
+    )
+    barrio = ChainedForeignKey(
+        Barrio, 
+        chained_field="ciudad",
+        chained_model_field="ciudad", 
+        show_all=False, 
+        auto_choose=True
+    )
+    # barrio = models.ForeignKey(Barrio)
     distrito = models.IntegerField(choices=DISTRITO_CHOICE)
 
     direccion = models.CharField(max_length=200)
@@ -125,12 +140,12 @@ class Persona(models.Model):
     j_oficio = models.ForeignKey(Oficio, related_name='oficio_jefe', blank=True, verbose_name = u'oficio', null=True)
 
     def __unicode__(self):
-        return u'%s %s %s %s' % (self.primer_nombre, self.segundo_nombre, 
+        return u'%s - %s %s %s %s' % (self.codigo, self.primer_nombre, self.segundo_nombre, 
                                  self.primer_apellido, self.segundo_apellido)
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.codigo = Persona.objects.all().count()
+            self.codigo = Persona.objects.all().count() + 1
         super(Persona, self).save(args, kwargs)
 
 # 1: masculino, 2: femenino

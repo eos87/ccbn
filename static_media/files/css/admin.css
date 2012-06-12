@@ -5,9 +5,9 @@
     float: left;
     list-style: none !important;
 }
-p{margin: 0px !important; padding: 0px !important;}
 .field-persona p{
     font-size: 13px !important;
+    margin: 0px !important; padding: 0px !important;
 }
 tr[id^="inscripcioncurso_set"] td{
     padding-top: 1em !important;
@@ -34,4 +34,8 @@ tr[id^="inscripcioncurso_set"] td{
 
 .inline-group label{
     width: 11em !important;
+}
+
+#id_persona, select[id*='libro']{
+    width: 200px !important;
 }

@@ -43,7 +43,11 @@ class Salida(models.Model):
     model = models.CharField(max_length=50, blank=True, default='', choices=load_choice_models())
 
     def __unicode__(self):
-        return u'%s' % self.id
+        return u'%s' % self.titulo
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('ccbn.views.salida_detail', [self.id])
 
     def meta_symbol(self):
         if self.tipo_meta == 1: # Percent
@@ -51,13 +55,13 @@ class Salida(models.Model):
         elif self.tipo_meta == 2: # count
             return ''
 
-CRITERIA_CHOICE = (('', 'None'), ('__gte', 'greater than or equal'), )
+CRITERIA_CHOICE = (('', 'None'), ('__gte', 'Mayor o igual que'), )
 
 class Filter(models.Model):
     salida = models.ForeignKey(Salida)
-    field = models.CharField(max_length=50, blank=True, default='', choices=((1,1), ))
-    criteria = models.CharField(max_length=30, blank=True, default='', choices=CRITERIA_CHOICE)
-    value = models.CharField(max_length=50, blank=True, default='')
+    field = models.CharField(max_length=50, default='')
+    criteria = models.CharField(max_length=30, default='', choices=CRITERIA_CHOICE, blank=True)
+    value = models.CharField(max_length=50)
 
     def __unicode__(self):
         return u'%s' % self.id

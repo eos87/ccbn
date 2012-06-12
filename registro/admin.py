@@ -164,7 +164,7 @@ class PersonaAdmin(admin.ModelAdmin):
     }
     readonly_fields = ('codigo', )
     def response_add(self, request, obj):
-        return super(PersonaAdmin, self).response_add(request, obj, '../%s/#laconcha')
+        return super(PersonaAdmin, self).response_add(request, obj, '../%s/#shva')
 
     def add_view(self, request):
         self.inlines=[RelacionInline, ModuloPersonaInline]
@@ -191,8 +191,7 @@ class PersonaAdmin(admin.ModelAdmin):
 
             self.inlines += [eval(inline) for inline in inlines]
 
-        except Exception as e:
-            
+        except Exception as e:            
             print e
 
         return super(PersonaAdmin, self).change_view(request, obj_id)

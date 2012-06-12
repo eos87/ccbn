@@ -23,7 +23,13 @@ class ActividadIndividual(models.Model):
     def __unicode__(self):
         return u'Registro el %s' % self.fecha
 
+    def _get_display(self):
+        return '%s | %s' % (self.get_actividad_display(), self.persona)
+
+    display = property(_get_display)
+
     class Meta:
+        ordering = ['-fecha']
         verbose_name_plural = u'Actividades Individuales'
 
 class Consulta(models.Model):
@@ -37,10 +43,21 @@ class Consulta(models.Model):
     class Meta:
         verbose_name_plural = u'Consultas'
 
+class Libro(models.Model):
+    categoria = models.IntegerField(choices=CHOICE_CATEGORIA)
+    registro = models.CharField(max_length=200)
+    titulo = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return u'%s' % self.registro
+
+    class Meta:
+        verbose_name_plural = u'Libros'
+
 class Prestamo(models.Model):
     actividad = models.ForeignKey(ActividadIndividual)
-    registro_libro_prestar = models.CharField(verbose_name = u'Registro de libro', max_length=50)
-    dias = models.IntegerField()
+    libro = models.ForeignKey(Libro)
+    dias = models.IntegerField(u'Días de préstamo')
     fecha_retorno = models.DateField()
 
     def __unicode__(self):
@@ -51,7 +68,7 @@ class Prestamo(models.Model):
 
 class Retorno(models.Model):
     actividad = models.ForeignKey(ActividadIndividual)
-    registro_libro_retorno = models.CharField(verbose_name = u'Registro de libro', max_length=50)
+    libro = models.ForeignKey(Libro)
     dias_mora = models.IntegerField()
     fecha_retorno = models.DateField()
 

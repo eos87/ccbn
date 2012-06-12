@@ -1,5 +1,8 @@
 from django.contrib import admin
+from django.core import validators
+from django.core.exceptions import ValidationError
 from models import *
+from django import forms
 
 class SubModuloAdmin(admin.ModelAdmin):
     list_display = ['nombre', 'parent_module', 'inline']
@@ -24,9 +27,18 @@ class ModuloAdmin(admin.ModelAdmin):
 
 admin.site.register(Modulo, ModuloAdmin)
 
+class CustomChoiceField(forms.ChoiceField):
+    def validate(self, value):
+        if value in validators.EMPTY_VALUES and self.required:                                                              
+            raise ValidationError(self.error_messages['required'])
+
+class FilterForm(forms.ModelForm):
+    field = CustomChoiceField(choices=(('', '---------'), ), label='Field')
+
 class FilterInline(admin.TabularInline):
     model = Filter
     extra = 1
+    form = FilterForm
 
     class Media:
         js= ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', 
@@ -35,4 +47,4 @@ class FilterInline(admin.TabularInline):
 class SalidaAdmin(admin.ModelAdmin):
     inlines = [FilterInline, ]
 
-# admin.site.register(Salida, SalidaAdmin)
+admin.site.register(Salida, SalidaAdmin)

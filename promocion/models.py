@@ -4,7 +4,7 @@ from atencionintegral.models import generate_years_choice, START_YEAR
 
 class BasePromocion(models.Model):
     nombre = models.CharField(max_length=100)
-    semestre = models.IntegerField()
+    semestre = models.IntegerField(choices=((1, '1er Semestre'), (2, '2do Semestre')))
     year = models.IntegerField('Año', choices=generate_years_choice(START_YEAR))
 
     def __unicode__(self):

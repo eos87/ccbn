@@ -30,3 +30,11 @@ def read_all_models():
         else:
             exclude.append(model)
     return lista
+
+def get_porcentaje(total, cantidad):
+    '''Metodo para calcular el porcentaje de una cantidad sobre un total'''
+    if total == None or cantidad == None or total == 0:
+        x = 0
+    else:
+        x = (cantidad * 100) / total
+    return x

@@ -6,16 +6,14 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    url(r'^index2/', 'registro.views.testing', name='index2'),
+    url(r'^index2/', 'ccbn.views.salidas_list', name='salidas_list'),
+    url(r'^i/(?P<id>\d+)/$', 'ccbn.views.salida_detail', name='salida_detail'),
     url(r'^loadfields/$', 'ccbn.views.loadfields', name='loadfields'),
-    # url(r'^ccbn/', include('ccbn.foo.urls')),
+    url(r'^getfilters/$', 'sistema.views.get_filters', name='getfilters'),
+    url(r'^getprestamodata/$', 'sistema.views.get_prestamo_data', name='get_prestamo_data'),
 
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
     (r'^$', 'django.contrib.auth.views.login', {'template_name': 'index.html'}),
-	#url(r'^$',direct_to_template,{'template': 'index.html'}),
+    url(r'^chaining/', include('smart_selects.urls')),
     url(r'^admin/', include(admin.site.urls)),
 
 )

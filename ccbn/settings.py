@@ -104,6 +104,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'autocomplete',
     'south',
+    'smart_selects',
 
     'lugar',
     'sistema',
@@ -146,3 +147,6 @@ LOGGING = {
 
 ADMIN_MEDIA_PREFIX = ''
 LOGIN_REDIRECT_URL = '/admin'
+
+USE_DJANGO_JQUERY = False
+JQUERY_URL = "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"
