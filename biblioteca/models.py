@@ -90,10 +90,16 @@ class Servicio(models.Model):
         verbose_name = u'Servicio Bibliotecario'
         verbose_name_plural = u'Servicios bibliotecarios'
 
+class NombresActividades(models.Model):
+    nombre = models.CharField(max_length=200)
+
+    def __unicode__(self):
+        return self.nombre
 
 class ActividadColectiva(models.Model):
     fecha = models.DateTimeField()
-    actividad = models.IntegerField() # with choices
+    #actividad = models.IntegerField() # with choices
+    actividad = models.ForeignKey(NombresActividades, verbose_name="Actividad")
     ninos = models.IntegerField(default=0)
     ninas = models.IntegerField(default=0)
     jovenes_hombres = models.IntegerField(default=0)

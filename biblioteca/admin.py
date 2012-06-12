@@ -47,6 +47,9 @@ class ServicioInline(admin.TabularInline):
 
 class ActividadIndividualAdmin(admin.ModelAdmin):
     list_display = ['display', 'fecha', 'actividad']
+    list_filter = ['fecha', 'actividad']
+    search_fields = ['persona__primer_nombre','persona__segundo_nombre',
+                     'persona__primer_apellido','persona__segundo_apellido']
     add_form_template = 'admin/registro/add_form_template.html'
     inlines = []
 
@@ -86,6 +89,7 @@ class ActividadColectivaAdmin(admin.ModelAdmin):
         ('Otros datos', {'fields': ['evaluacion_rapida', 'foto', 'comentarios', 'acuerdos']})
     ]
 admin.site.register(ActividadColectiva, ActividadColectivaAdmin)
+admin.site.register(NombresActividades)
 
 class LibroAdmin(admin.ModelAdmin):
     search_fields = ['registro', 'titulo', 'categoria']
