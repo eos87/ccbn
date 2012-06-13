@@ -19,7 +19,7 @@ class Frecuencia(models.Model):
         return u'%s' % self.nombre
 
     class Meta:
-        verbose_name_plural = u'Frencuencias'
+        verbose_name_plural = u'Frecuencias'
 
 class Curso(models.Model):
     nombre = models.CharField(max_length=200)

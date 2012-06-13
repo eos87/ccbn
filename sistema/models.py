@@ -55,7 +55,8 @@ class Salida(models.Model):
         elif self.tipo_meta == 2: # count
             return ''
 
-CRITERIA_CHOICE = (('', 'None'), ('__gte', 'Mayor o igual que'), )
+CRITERIA_CHOICE = (('', 'None'), ('__gte', 'Mayor o igual que'), ('__gt', 'Mayor que'), 
+                   ('__lte', 'Menor o igual que'), ('__lt', 'Menor que'))
 
 class Filter(models.Model):
     salida = models.ForeignKey(Salida)
