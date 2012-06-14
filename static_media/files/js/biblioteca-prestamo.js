@@ -2,7 +2,8 @@
     $(document).ready(function(){
         $('.field-fecha_retorno input').attr('readonly', 'readonly');
         $('input[id$="dias"]').keyup(function(){
-            var d = new Date();
+            var foo = $('#id_fecha_0').val().split('/');
+            var d = new Date(foo[1] + '/' + foo[0] + '/' + foo[2]);
             var days = $(this).val();
             if (/^\d+$/.test(days)){
                 d.setDate(d.getDate()+parseInt(days));
@@ -11,6 +12,9 @@
             }else{
                 $(this).parent().siblings('.field-fecha_retorno').children('input').val('');
             }
+        });
+        $('#id_fecha_0').keyup(function(){
+            keyupTrigger(false);
         });
     });
     $(window).load(function(){

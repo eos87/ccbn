@@ -18,6 +18,7 @@ admin.site.register(EventoInterno, EventoInternoAdmin)
 
 class EventoExternoAdmin(admin.ModelAdmin):
     list_display = ['actividad', 'fecha', 'lugar']
+    filter_horizontal = ['personas', ]
     fieldsets = [
         (None, {'fields': ['titulo','lugar', 'actividad', 'fecha',]}),
         ('Participantes', {'fields': ['facilitadores', ('ninos', 'ninas', 'jovenes_hombres'), ('jovenes_mujeres', 'adultos_hombres', 'adultos_mujeres')]}),
