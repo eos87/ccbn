@@ -20,11 +20,11 @@ NIVEL_ACADEMICO_CHOICE = ((1, u'Pre-escolar'),
                           (3, u'Alfabetizado'),
                           (4, u'Primaria incompleta'),
                           (5, u'Primaria completa'),
-                          (6, u'Secundaria imcompleta'),
+                          (6, u'Secundaria incompleta'),
                           (7, u'Secundaria completa'),
-                          (8, u'Técnico imcompleto'),
+                          (8, u'Técnico incompleto'),
                           (9, u'Técnico completo'),
-                          (10, u'Universidad imcompleta'),
+                          (10, u'Universidad incompleta'),
                           (11, u'Universidad completa'),
                           (99, u'Ninguno'))
 # NIVEL_ESTUDIO_CHOICE = ((1, u'1er Grado'),
@@ -54,7 +54,12 @@ NIVEL_ESTUDIO_CHOICE = ((1, u'Alfabetizandose'),
                         (2, u'Primaria'),
                         (3, u'Secundaria'),
                         (4, u'Universidad'),
-                        (5, u'Técnico')
+                        (5, u'Técnico'),
+                        (6, u'Postgrado'),
+                        (7, u'Maestría'),
+                        (8, u'Cursos'),
+                        (9, u'Diplomados'),
+                        (10, u'No estudia')
                         )
 
 JEFE_FAMILIA_CHOICE = ((1, u'Padre'),

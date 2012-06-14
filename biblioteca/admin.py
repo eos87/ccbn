@@ -92,7 +92,7 @@ admin.site.register(ActividadColectiva, ActividadColectivaAdmin)
 admin.site.register(NombresActividades)
 
 class LibroAdmin(admin.ModelAdmin):
-    search_fields = ['registro', 'titulo', 'categoria']
-    list_display = ['registro', 'titulo', 'categoria']
+    search_fields = ['titulo', 'registro', 'categoria']
+    list_display = ['titulo', 'registro', 'categoria']
 
 admin.site.register(Libro, LibroAdmin)

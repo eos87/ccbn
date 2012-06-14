@@ -41,6 +41,7 @@ class ActividadEvento(models.Model):
 
 class EventoColectivo(models.Model):
     fecha = models.DateTimeField()
+    titulo = models.CharField('Nombre del evento', max_length=200)
     lugar = models.CharField(max_length=200)
     actividad = models.ForeignKey(ActividadEvento, verbose_name="Actividad")
 

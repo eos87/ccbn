@@ -45,5 +45,16 @@ class BecadosUniversitariosInline(BecadosSecundariaInline):
 class BecaUniversitariaAdmin(admin.ModelAdmin):
     inlines = [BecadosUniversitariosInline, ]
 
+# class EventoColectivaAtencionAdmin(admin.ModelAdmin):
+#     fieldsets = [
+#         (None, {'fields': ['lugar',('fecha', 'actividad'),]}),
+#         ('Participantes', {'fields': [('participantes','ninos', 'ninas', 'jovenes_hombres'), ('jovenes_mujeres', 'adultos_hombres', 'adultos_mujeres')]}),
+#         ('Otros datos', {'fields': [('sensibilizacion', 'apropiacion'),'foto', 'comentarios', 'acuerdos']})
+#     ]
+#     class Meta:
+#         js = ('js/tiny_mce/tiny_mce.js',
+#               'js/basic_config.js',)
+
 admin.site.register(BecaUniversitaria, BecaUniversitariaAdmin)
+# admin.site.register(EventoColectivo, EventoColectivaAtencionAdmin)
 admin.site.register(ActividadEvento)

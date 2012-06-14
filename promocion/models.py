@@ -47,6 +47,7 @@ CHOICE_APROPIACION = ((1, 'Excelente'), (2, 'Buena'), (3, 'Regular'), (4, 'Mala'
 
 class EventoColectivo(models.Model):
     fecha = models.DateTimeField()
+    titulo = models.CharField('Nombre del evento', max_length=200)
     lugar = models.CharField(max_length=200)
     actividad = models.IntegerField(choices=CHOICE_ACTIVIDAD_COLECTIVA)
 

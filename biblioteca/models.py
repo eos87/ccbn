@@ -49,7 +49,7 @@ class Libro(models.Model):
     titulo = models.CharField(max_length=200)
 
     def __unicode__(self):
-        return u'%s' % self.registro
+        return u'%s - %s' % (self.titulo, self.registro)
 
     class Meta:
         verbose_name_plural = u'Libros'

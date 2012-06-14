@@ -55,9 +55,12 @@ admin.site.register(Pintura, PinturaAdmin)
 # Eventos Colectivos
 class EventoColectivoAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': [('lugar', 'actividad'), 'fecha',]}),
+        (None, {'fields': [('titulo','lugar'),('actividad', 'fecha'),]}),
         ('Participantes', {'fields': ['participantes', ('ninos', 'ninas', 'jovenes_hombres'), ('jovenes_mujeres', 'adultos_hombres', 'adultos_mujeres')]}),
         ('Otros datos', {'fields': ['sensibilizacion', 'apropiacion', 'foto', 'comentarios', 'acuerdos']})
     ]
+    class Meta:
+        js = ('js/tiny_mce/tiny_mce.js',
+              'js/basic_config.js',)
 
 admin.site.register(EventoColectivo, EventoColectivoAdmin)
