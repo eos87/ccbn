@@ -22,7 +22,7 @@ class EventoExternoAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['titulo','lugar', 'actividad', 'fecha',]}),
         ('Participantes', {'fields': ['facilitadores', ('ninos', 'ninas', 'jovenes_hombres'), ('jovenes_mujeres', 'adultos_hombres', 'adultos_mujeres')]}),
-        ('Otros datos', {'fields': ['tematica', 'foto', 'comentarios', 'acuerdos']})
+        ('Otros datos', {'fields': ['tematica', 'foto', 'comentarios', 'acuerdos','personas']})
     ]
     class Media:
         js = ['js/tiny_mce/tiny_mce.js',
