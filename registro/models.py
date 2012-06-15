@@ -327,7 +327,8 @@ class RegistroBecaSecundaria(BaseRegistroAnual):
     solidario_centro = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
     solidario_comunidad = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
     solidario_sociedad = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
-
+    bibliotecario =  models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    
     class Meta:
         verbose_name_plural = u'Registro Beca Secundaria'
 
@@ -339,7 +340,8 @@ class RegistroBecaUniversitaria(BaseRegistroAnual):
     solidario_famila = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
     solidario_centro = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
     solidario_comunidad = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
-    solidario_sociedad = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)    
+    solidario_sociedad = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    bibliotecario =  models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)   
 
     class Meta:
         verbose_name_plural = u'Registro Beca Universitaria'

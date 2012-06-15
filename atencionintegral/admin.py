@@ -24,7 +24,7 @@ admin.site.register(BecaPrimaria, BecaPrimariaAdmin)
 class BecadosSecundariaInline(admin.TabularInline):
     model = RegistroBecaSecundaria    
     fields = ('persona', 'fecha', 'servicio_social', 'esp_propos', 'promotor', 'solidario_famila', 
-               'solidario_centro','solidario_comunidad', 'solidario_sociedad')
+               'solidario_centro','solidario_comunidad', 'solidario_sociedad','bibliotecario')
     readonly_fields = ['persona', 'fecha']
     extra = 0
     max_num = 0
@@ -47,9 +47,9 @@ class BecaUniversitariaAdmin(admin.ModelAdmin):
 
 class EventoColectivaAtencionAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['lugar',('fecha', 'actividad'),]}),
+        (None, {'fields': ['titulo','lugar',('fecha', 'actividad'),]}),
         ('Participantes', {'fields': [('participantes','ninos', 'ninas', 'jovenes_hombres'), ('jovenes_mujeres', 'adultos_hombres', 'adultos_mujeres')]}),
-        ('Otros datos', {'fields': [('sensibilizacion', 'apropiacion'),'foto', 'comentarios', 'acuerdos']})
+        ('Otros datos', {'fields': [('apropiacion'),'foto', 'comentarios', 'acuerdos']})
     ]
     class Media:
         js = ['js/tiny_mce/tiny_mce.js',
