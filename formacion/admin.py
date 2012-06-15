@@ -37,5 +37,5 @@ class EventoColectivaFormacionAdmin(admin.ModelAdmin):
               'js/basic_config.js',]
 
 admin.site.register(Curso, CursoAdmin)
-admin.site.register(ActividadEvento)
-admin.site.register(EventoColectivo, EventoColectivaFormacionAdmin)
+admin.site.register(ActividadEventoFormacion)
+admin.site.register(EventoColectivoFormacion, EventoColectivaFormacionAdmin)
