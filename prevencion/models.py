@@ -58,7 +58,7 @@ class EventoExterno(models.Model):
     lugar = models.CharField(max_length=200)
     actividad = models.IntegerField(choices=CHOICE_ACTIVIDADES_EXTERNAS)
 
-    facilitadores = models.IntegerField(default=0, null=True, blank=True)
+    facilitadores = models.IntegerField("Participantes",default=0, null=True, blank=True)
     ninos = models.IntegerField(default=0)
     ninas = models.IntegerField(default=0)
     jovenes_hombres = models.IntegerField(default=0)
