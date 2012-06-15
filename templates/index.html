@@ -3,6 +3,11 @@
 {%block contenido%}
 <div class="grid_12 formindex">
 	<div class="grid_6 prefix_3 suffix_3 loginform">
+		{% if user.username %}
+
+		Hola {{user}} | <a href="/admin">Ir a la Administración</a>
+
+		{% else %}
 		 <form method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}
 		 	{%if form.errors%}
 				<div class="alert">
@@ -23,6 +28,7 @@
 			</div>
 			<div class="clear"></div>
 		 </form>
+		{% endif %}
 	</div>
 </div>
 
