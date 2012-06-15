@@ -72,7 +72,8 @@ class EventoExterno(models.Model):
     comentarios = models.TextField(blank=True, default='')
     acuerdos = models.TextField(blank=True, default='')
 
-    personas = models.ManyToManyField(Persona, limit_choices_to = {'modulopersona__pv_externa__gt': 0})
+    personas = models.ManyToManyField(Persona, blank=True,
+               limit_choices_to = {'modulopersona__pv_externa__gt': 0})
 
     def __unicode__(self):
         return u'%s %s' % (self.actividad, self.fecha)
