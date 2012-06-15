@@ -31,7 +31,7 @@ class BecaUniversitaria(BaseBeca):
     class Meta:
         verbose_name_plural = u'Becas Universitarias'
 
-class ActividadEvento(models.Model):
+class ActividadEventoAtencion(models.Model):
     nombre = models.CharField(max_length=200)
 
     def __unicode__(self):
@@ -39,11 +39,11 @@ class ActividadEvento(models.Model):
     class Meta:
         verbose_name_plural = "Tipo de actividad"
 
-class EventoColectivo(models.Model):
+class EventoColectivoAtencion(models.Model):
     fecha = models.DateTimeField()
     titulo = models.CharField('Nombre del evento', max_length=200)
     lugar = models.CharField(max_length=200)
-    actividad = models.ForeignKey(ActividadEvento, verbose_name="Actividad")
+    actividad = models.ForeignKey(ActividadEventoAtencion, verbose_name="Actividad")
 
     participantes = models.IntegerField(default=0)
     ninos = models.IntegerField(default=0)
