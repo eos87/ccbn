@@ -9,6 +9,7 @@ class ConsultaInline(admin.TabularInline):
 class PrestamoInline(admin.TabularInline):
     model = Prestamo
     extra = 1
+    max_num = 1
 
     class Media:
         css = {
@@ -19,6 +20,7 @@ class PrestamoInline(admin.TabularInline):
 class RetornoInline(admin.TabularInline):
     model = Retorno
     extra = 1
+    max_num = 1
 
     def formfield_for_foreignkey(self, db_field, request=None, **kwargs):
         field = super(RetornoInline, self).formfield_for_foreignkey(db_field, request, **kwargs)

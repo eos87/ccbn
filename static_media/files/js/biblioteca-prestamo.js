@@ -13,4 +13,17 @@
             }
         });
     });
+    $(window).load(function(){
+        var $launcher = $($('.field-fecha .datetimeshortcuts').children()[0]);
+        $launcher.attr('href', 'javascript:keyupTrigger();');
+    });
 })(jQuery || django.jQuery);
+
+var keyupTrigger = function(key){
+    key = typeof key !== 'undefined' ? false : true;
+    var $ = jQuery || django.jQuery;
+    if(key){
+        DateTimeShortcuts.handleCalendarQuickLink(0, 0);    
+    }
+    $('#id_prestamo_set-0-dias').trigger('keyup');
+}
