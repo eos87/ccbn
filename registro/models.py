@@ -137,7 +137,14 @@ class Persona(models.Model):
         auto_choose=True
     )
     # barrio = models.ForeignKey(Barrio)
-    distrito = models.IntegerField(choices=DISTRITO_CHOICE)
+    #distrito = models.IntegerField(choices=DISTRITO_CHOICE)
+    # distrito = ChainedForeignKey(
+    #     Distrito,
+    #     chained_field="barrio",
+    #     chained_model_field="barrio",
+    #     show_all=False,
+    #     auto_choose=True
+    # )
 
     direccion = models.CharField(max_length=200)
     telefono = models.CharField(max_length=12, help_text='Telefono convencional', blank=True, default='')
