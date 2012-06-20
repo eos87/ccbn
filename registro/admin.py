@@ -18,6 +18,18 @@ class ModuloPersonaInline(admin.StackedInline):
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},
     }
 
+    def formfield_for_manytomany(self, db_field, request=None, **kwargs):
+        field = super(ModuloPersonaInline, self).formfield_for_manytomany(db_field, request, **kwargs)
+        
+        # check if superuser
+        if request.user.is_superuser:
+            return field
+
+        if not request.user.has_perm('sistema.%s' % db_field.name):
+            field.widget.attrs = {'disabled': 'disabled'}
+
+        return field
+
 # Inline para registro en Biblioteca
 class RegistroBibliotecaInline(admin.StackedInline):
     model = RegistroBiblioteca

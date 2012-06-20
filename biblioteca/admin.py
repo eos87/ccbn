@@ -46,7 +46,7 @@ class ServicioInline(admin.TabularInline):
     extra = 1
 
 class ActividadIndividualAdmin(admin.ModelAdmin):
-    list_display = ['display', 'fecha', 'actividad']
+    list_display = ['display', 'fecha', 'actividad', 'libros']
     list_filter = ['fecha', 'actividad']
     search_fields = ['persona__primer_nombre','persona__segundo_nombre',
                      'persona__primer_apellido','persona__segundo_apellido']

@@ -44,7 +44,13 @@ class FilterInline(admin.TabularInline):
         js= ['http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js', 
             '/files/js/query.filters.js']
 
+class QuerySplitInline(admin.TabularInline):
+    model = QuerySplit
+    extra = 1
+    form = FilterForm
+
 class SalidaAdmin(admin.ModelAdmin):
-    inlines = [FilterInline, ]
+    inlines = [FilterInline, QuerySplitInline]
 
 admin.site.register(Salida, SalidaAdmin)
+admin.site.register(Estrategia)

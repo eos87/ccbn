@@ -1,7 +1,16 @@
 {% extends "base.html" %}
+{% load ccbn_tags %}
 
 {% block contenido %}
 {{salida.titulo}}<br>
 Meta: {{salida.meta}}<br>
 Actual: {{result}} {{salida.meta_symbol}}
+<hr>
+{% if salida.querysplit_set.all %}
+Submetas:<br>
+    {% for split in salida.querysplit_set.all %}
+    Meta {{forloop.counter}}: {{split.meta}} {{split.meta_symbol}} {{split.getlabel}}<br>
+    actual: {{splits_dicc|get_value:split.id}} {{split.meta_symbol}}<br>
+    {% endfor %}
+{% endif %}
 {% endblock %}

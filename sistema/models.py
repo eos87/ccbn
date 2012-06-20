@@ -11,6 +11,14 @@ class Modulo(models.Model):
 
     class Meta:
         verbose_name_plural = u'Modulos'
+        permissions = (
+            ("biblioteca", "Administrador Biblioteca"),
+            ("formacion", "Administrador Formacion"),
+            ('atencion_integral', "Administrador Atencion Integral"),
+            ('promocion_artistica', "Administrador Promocion Artistica"),
+            ('pv_interna', "Administrador Prevencion de Violencia Interna"),
+            ('pv_externa', "Administrador Prevencion de Violencia Externa"),
+        )
 
 # this list is based on the inlines with foo param in registro.admin module
 INLINES = ('RegistroBibliotecaInline', 'FormacionBasicaInline', 'FormacionVocacionalInline', 'FormacionArtisticaInline',
@@ -28,6 +36,16 @@ class SubModulo(models.Model):
     def __unicode__(self):
         return u'%s' % self.nombre
 
+class Estrategia(models.Model):
+    nombre = models.TextField()
+    programa = models.ForeignKey(Modulo)
+
+    class Meta:
+        verbose_name_plural = u'Estrategias'
+
+    def __unicode__(self):
+        return u'%s - %s' % (self.programa, self.nombre)
+
 META_CHOICE = ((1, 'Percent'), (2, 'Count'))
 
 def load_choice_models():
@@ -37,6 +55,7 @@ def load_choice_models():
 
 class Salida(models.Model):
     year = models.IntegerField(choices=generate_years_choice(2012))
+    estrategia = models.ForeignKey(Estrategia)
     meta = models.IntegerField(blank=True, null=True)
     titulo = models.TextField(blank=True, default='')
     tipo_meta = models.IntegerField(choices=META_CHOICE, blank=True, null=True)
@@ -63,6 +82,32 @@ class Filter(models.Model):
     field = models.CharField(max_length=50, default='')
     criteria = models.CharField(max_length=30, default='', choices=CRITERIA_CHOICE, blank=True)
     value = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return u'%s' % self.id
+
+class QuerySplit(models.Model):
+    salida = models.ForeignKey(Salida)
+    field = models.CharField(max_length=50, default='')
+    value = models.CharField(max_length=50)
+    meta = models.IntegerField()
+    tipo_meta = models.IntegerField(choices=META_CHOICE, blank=True, null=True)
+    label = models.CharField(max_length=50, default='')
+
+    def meta_symbol(self):
+        if self.tipo_meta == 1: # Percent
+            return '%'
+        elif self.tipo_meta == 2: # count
+            return ''
+
+    def getlabel(self):
+        if self.label != '':
+            return self.label
+        else:
+            return self.field
+
+    class Meta:
+        verbose_name_plural = u'Query Split'
 
     def __unicode__(self):
         return u'%s' % self.id

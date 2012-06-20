@@ -23,10 +23,20 @@ class ActividadIndividual(models.Model):
     def __unicode__(self):
         return u'Registro el %s' % self.fecha
 
+    def libros_list(self):
+        if self.actividad == 'PrestamoInline':
+            return ', '.join([libro.get_name() for libro in Libro.objects.filter(prestamo__actividad__actividad=self.actividad)])
+        elif self.actividad == 'RetornoInline':
+            return ', '.join([libro.get_name() for libro in Libro.objects.filter(retorno__actividad__actividad=self.actividad)])
+
+        return ''
+
     def _get_display(self):
         return '%s | %s' % (self.get_actividad_display(), self.persona)
 
     display = property(_get_display)
+    libros = property(libros_list)
+
 
     class Meta:
         ordering = ['-fecha']
@@ -50,6 +60,9 @@ class Libro(models.Model):
 
     def __unicode__(self):
         return u'%s - %s' % (self.titulo, self.registro)
+
+    def get_name(self):
+        return u'%s - %s' % (self.titulo, self.registro)        
 
     class Meta:
         verbose_name_plural = u'Libros'

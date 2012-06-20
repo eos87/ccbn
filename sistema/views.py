@@ -7,11 +7,16 @@ from models import *
 def get_filters(request):
     ''' Retorna los filters para una salida_id dada'''
     id = request.GET.get('id', None)
-    lista= []
+    split = request.GET.get('split', None)
+    lista = []
     if id:
         salida = get_object_or_404(Salida, id=id)
-        for filter in salida.filter_set.all().order_by('id'):
-            lista.append(dict(id=id, field=filter.field))
+        if split:
+            for split in salida.querysplit_set.all().order_by('id'):
+                lista.append(dict(id=id, field=split.field))
+        else:
+            for filter in salida.filter_set.all().order_by('id'):
+                lista.append(dict(id=id, field=filter.field))
 
     return HttpResponse(simplejson.dumps(lista), mimetype="application/json")
 

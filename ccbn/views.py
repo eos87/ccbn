@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.utils import simplejson
 from django.db.models.fields import CharField, IntegerField
 from django.db.models.fields.related import ForeignKey
-from sistema.models import Salida
+from sistema.models import Salida, Modulo
 from ccbn.utils import get_porcentaje
 
 def endswith(x, value):
@@ -45,24 +45,20 @@ def loadfields(request):
 
     return HttpResponse(simplejson.dumps(lista), mimetype="application/json")
 
-def parse_filters(qs, model):
+def parse_filters(qs):
     dicc = {}
     for filtro in qs:
         if filtro.criteria:
             key = '%s%s' % (filtro.field, filtro.criteria)
         else:
             key = filtro.field
-        # field = model._meta.get_field_by_name(filtro.field) # obtener el campo para saber su tipo. Eg: string, int, ....
-        # luego convertir el value si es necesario
-        # if isinstance(field[0], IntegerField):
-            # dicc[key] = int(filtro.value)
 
         dicc[key] = filtro.value
     
     return dicc
 
 def salidas_list(request):
-    object_list = Salida.objects.all()
+    modulos = Modulo.objects.all()
     return render_to_response('index2.html', RequestContext(request, locals()))
 
 def salida_detail(request, id=None):
@@ -74,13 +70,24 @@ def salida_detail(request, id=None):
         filters_qs = salida.filter_set.all()
 
         if filters_qs:
-            query = base.filter(** parse_filters(filters_qs, model))
+            query = base.filter(**parse_filters(filters_qs))
+        else:
+            query = base
 
         if salida.tipo_meta == 1: # percent
             total = base.count()
             cantidad = query.count()
             result = get_porcentaje(total, cantidad)
         elif salida.tipo_meta == 2: # count
-            result = base.count()
+            result = query.count()
+
+        # verificando splits y obteniendo valores
+        splits_dicc = {}
+        for split in salida.querysplit_set.all():
+            sub_qs = query.filter(**{split.field:split.value})
+            if split.tipo_meta == 1: # percent                
+                splits_dicc[split.id] = get_porcentaje(query.count(), sub_qs.count())
+            elif split.tipo_meta == 2: # count
+                splits_dicc[split.id] = sub_qs.count()
 
     return render_to_response('salida_detail.html', RequestContext(request, locals()))

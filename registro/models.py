@@ -185,6 +185,8 @@ RELACIONES = {
     'amiga': {1: 'amigo', 2: 'amiga'},
     'sobrina': {1: 'tio', 2: 'tia'},
     'sobrino': {1: 'tio', 2: 'tia'},
+    'esposo': {1: 'esposo', 2: 'esposa'},
+    'esposa': {1: 'esposo', 2: 'esposa'},
 }
 
 class Relacion(models.Model):

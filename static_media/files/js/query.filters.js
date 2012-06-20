@@ -7,10 +7,17 @@
         if( state == 'edit' ){
             id = url[url.length-2];
             var combos = $('.field-field > select');
+            var splitters = $('#querysplit_set-group .field-field select');
             loadFields($('#id_model').val(), '.field-field > select');
             $.getJSON('/getfilters/?id='+id, function(data){
                 $.each(data, function(id, item){
                     $(combos[id]).val(item.field);
+                });
+            });
+            //obtener splitters al abrir o editar object
+            $.getJSON('/getfilters/?id='+id+'&split=1', function(data){
+                $.each(data, function(id, item){
+                    $(splitters[id]).val(item.field);
                 });
             });
         }else{
