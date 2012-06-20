@@ -45,12 +45,15 @@ class Ciudad(models.Model):
         return self.nombre
 
 BARRIO_TIPO = ((1, 'Barrio'), (2, 'Comarca'))
+DISTRITO_TIPO = ((1, 'Distrito 1'), (2, 'Distrito 2'),
+                 (3, 'Distrito 3'), (4, 'Distrito 4'),
+                 (5, 'Distrito 5'), (6, 'Distrito 6'))
 
 class Barrio(models.Model):
     ciudad = models.ForeignKey(Ciudad)
     tipo = models.IntegerField(choices=BARRIO_TIPO)
     nombre = models.CharField(max_length=40)
-
+    distrito = models.IntegerField(choices=DISTRITO_TIPO)
     class Meta:
         verbose_name = 'Barrio/Comarca'
         verbose_name_plural = 'Barrios/Comarcas'

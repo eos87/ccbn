@@ -2,26 +2,36 @@
 from django.db import models
 from registro.models import CHOICE_CALIDAD, Persona
 
-CHOICE_ACTIVIDADES_INTERNAS = ((1, 'Taller para CCBN'), 
+CHOICE_ACTIVIDADES_INTERNAS = (
+                               (1, 'Taller para CCBN'), 
                                (2, 'Taller para docentes'), 
                                (3, 'Taller para RPSC'), 
                                (4, 'Grupos de Reflexión'), 
-                               (5, 'Campañas'), (6, 'Ferias'), 
+                               (5, 'Campañas'), 
+                               (6, 'Ferias'), 
                                (7, 'Fortalecimiento institucional'),
                                (8, 'Intercambios'),
-                               (9, 'Red de promotoria social comunitaria'),
-                               (10, 'Foro'))
-CHOICE_ACTIVIDADES_EXTERNAS = ((1, 'Feria'), (2, 'Charla'), 
-                               (3, 'Reflexión'), (4, 'Lúdica'), 
-                               (5, 'Teatro'))
+                               (9, 'Foro'),
+                               (10, 'Lúdica'),
+                               (11, 'Teatro'),
+                               (12, 'Charlas'),
+                               (13, 'Autocuido'),
+                               (14, 'Autoayuda'),
+                               )
+# CHOICE_ACTIVIDADES_EXTERNAS = ((1, 'Feria'), (2, 'Charla'), 
+#                                (3, 'Reflexión'), (4, 'Lúdica'), 
+#                                (5, 'Teatro'))
 
 CHOICE_TEMATICA = ((1, u'Derecho Niñez'), 
-                   (2, u'Discriminación sexual'), 
+                   (2, u'Discriminación'), 
                    (3, 'Violencia Intrafamiliar'),
                    (4, 'Derechos Humanos'), 
-                   (5, 'Seguridad Ciudadana'),
-                   (6, 'Violencia basada en genero'),
-                   (7, 'Autocuido'))
+                   (5, 'Violencia basada en genero'),
+                   (6, 'Autoestima'),
+                   (7, 'Liderazgo'),
+                   (8, 'Incidencia Política'),
+                   (9, 'Autocuido'),
+                   )
 
 class EventoInterno(models.Model):
     fecha = models.DateTimeField()
@@ -56,7 +66,7 @@ class EventoExterno(models.Model):
     fecha = models.DateTimeField()
     titulo = models.CharField(max_length=200)
     lugar = models.CharField(max_length=200)
-    actividad = models.IntegerField(choices=CHOICE_ACTIVIDADES_EXTERNAS)
+    actividad = models.IntegerField(choices=CHOICE_ACTIVIDADES_INTERNAS)
 
     facilitadores = models.IntegerField("Participantes",default=0, null=True, blank=True)
     ninos = models.IntegerField(default=0)

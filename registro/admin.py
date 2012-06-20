@@ -160,12 +160,12 @@ class PersonaAdmin(admin.ModelAdmin):
     list_filter = ['barrio','ciudad']
     search_fields = ['primer_nombre','segundo_nombre','primer_apellido','segundo_apellido']
     list_display = ['__unicode__','fecha_nacimiento','sexo','municipio',
-                    'ciudad','barrio','distrito']
+                    'ciudad','barrio']
     add_form_template = 'admin/registro/add_form_template.html'
     fieldsets = [
         ('Datos personales', {'fields': [('primer_nombre', 'segundo_nombre'), ('primer_apellido', 'segundo_apellido'), 
                                         ('sexo', 'fecha_nacimiento'), ('codigo', 'cedula'), ('personal_ccbn', 'docente_ccbn')]}),
-        ('Ubicacion', {'fields': [('municipio', 'ciudad'), ('barrio', 'distrito'), 'direccion', ('telefono', 'celular')]}),
+        ('Ubicacion', {'fields': [('municipio', 'ciudad'), ('barrio'), 'direccion', ('telefono', 'celular')]}),
         (u'Información Académica', {'fields': [('nivel_academico', 'nivel_estudio'), 'centro_actual']}),
         ('Datos del Hogar', {'fields': ['oficio', 'con_quien_vive', 'tipo_familia',]}),
         ('Jefe de Familia', {'fields': [('jefe_familia', 'j_oficio'), ('j_primer_nombre', 'j_segundo_nombre'), 

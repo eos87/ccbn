@@ -27,40 +27,46 @@ NIVEL_ACADEMICO_CHOICE = ((1, u'Pre-escolar'),
                           (10, u'Universidad incompleta'),
                           (11, u'Universidad completa'),
                           (99, u'Ninguno'))
-# NIVEL_ESTUDIO_CHOICE = ((1, u'1er Grado'),
-#                         (2, u'2do Grado'),
-#                         (3, u'3er Grado'),
-#                         (4, u'4to Grado'),
-#                         (5, u'5to Grado'),
-#                         (6, u'6to Grado'),                         
-#                         (7, u'1er Año Secundaria'),
-#                         (8, u'2do Año Secundaria'),
-#                         (9, u'3er Año Secundaria'),
-#                         (10, u'4to Año Secundaria'),
-#                         (11, u'5to Año Secundaria'),                                                  
-#                         (13, u'1er Año Universidad'),
-#                         (14, u'2do Año Universidad'),
-#                         (15, u'3er Año Universidad'),
-#                         (18, u'4to Año Universidad'),
-#                         (19, u'5to Año Universidad'),
-#                         (16, u'Primaria Aprobada'),
-#                         (12, u'Bachiller'),                                                  
-#                         (20, u'Graduado Universidad'),                         
-#                         (21, u'Técnico/a'),
-#                         (17, u'Analfabeta'),
-#                         (22, u'Alfabetizado/a'))
-
-NIVEL_ESTUDIO_CHOICE = ((1, u'Alfabetizandose'),
-                        (2, u'Primaria'),
-                        (3, u'Secundaria'),
-                        (4, u'Universidad'),
-                        (5, u'Técnico'),
-                        (6, u'Postgrado'),
-                        (7, u'Maestría'),
-                        (8, u'Cursos'),
-                        (9, u'Diplomados'),
-                        (10, u'No estudia')
+NIVEL_ESTUDIO_CHOICE = (
+                        (1, u'No estudia'),
+                        (2, u'1er Nivel Preescolar'),
+                        (3, u'2do Nivel Preescolar'),
+                        (4, u'3er Nivel Preescolar'),
+                        (5, u'1er Grado'),
+                        (6, u'2do Grado'),
+                        (7, u'3er Grado'),
+                        (8, u'4to Grado'),
+                        (9, u'5to Grado'),
+                        (10, u'6to Grado'),                         
+                        (11, u'1er Año Secundaria'),
+                        (12, u'2do Año Secundaria'),
+                        (13, u'3er Año Secundaria'),
+                        (14, u'4to Año Secundaria'),
+                        (15, u'5to Año Secundaria'),                                                  
+                        (16, u'1er Año Universidad'),
+                        (17, u'2do Año Universidad'),
+                        (18, u'3er Año Universidad'),
+                        (19, u'4to Año Universidad'),
+                        (20, u'5to Año Universidad'),
+                        (21, u'Alfabetizandose'),
+                        (22, u'Técnico'),
+                        (23, u'Postgrado'),
+                        (24, u'Maestría'),
+                        (25, u'Cursos'),
+                        (26, u'Diplomados'),
                         )
+
+# NIVEL_ESTUDIO_CHOICE = ((1, u'Alfabetizandose'),
+#                         (2, u'Primaria'),
+#                         (3, u'Secundaria'),
+#                         (4, u'Universidad'),
+#                         (5, u'Técnico'),
+#                         (6, u'Postgrado'),
+#                         (7, u'Maestría'),
+#                         (8, u'Cursos'),
+#                         (9, u'Diplomados'),
+#                         (10, u'No estudia')
+#                         )
 
 JEFE_FAMILIA_CHOICE = ((1, u'Padre'),
                        (2, u'Madre'),
@@ -131,14 +137,21 @@ class Persona(models.Model):
         auto_choose=True
     )
     # barrio = models.ForeignKey(Barrio)
-    distrito = models.IntegerField(choices=DISTRITO_CHOICE)
+    #distrito = models.IntegerField(choices=DISTRITO_CHOICE)
+    # distrito = ChainedForeignKey(
+    #     Distrito,
+    #     chained_field="barrio",
+    #     chained_model_field="barrio",
+    #     show_all=False,
+    #     auto_choose=True
+    # )
 
     direccion = models.CharField(max_length=200)
     telefono = models.CharField(max_length=12, help_text='Telefono convencional', blank=True, default='')
     celular = models.CharField(max_length=12, help_text='Telefono celular', blank=True, default='')
 
     nivel_academico = models.IntegerField(choices=NIVEL_ACADEMICO_CHOICE)
-    nivel_estudio = models.IntegerField('Estudio actual', choices=NIVEL_ESTUDIO_CHOICE)
+    nivel_estudio = models.IntegerField('Estudio actual Externo', choices=NIVEL_ESTUDIO_CHOICE)
     centro_actual = models.ForeignKey(Colegio, verbose_name = 'Centro de estudio actual', blank=True, null=True)
     oficio = models.ForeignKey(Oficio, blank=True, null=True)
 
