@@ -13,6 +13,8 @@ urlpatterns = patterns('',
     url(r'^getprestamodata/$', 'sistema.views.get_prestamo_data', name='get_prestamo_data'),
 
     (r'^$', 'django.contrib.auth.views.login', {'template_name': 'index.html'}),
+    (r'^programas/$', 'django.contrib.auth.views.login', {'template_name': 'sel_programa.html'}),
+    (r'^indicadores/$', 'django.contrib.auth.views.login', {'template_name': 'indicadores.html'}),
     url(r'^chaining/', include('smart_selects.urls')),
     url(r'^admin/', include(admin.site.urls)),
 

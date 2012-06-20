@@ -145,6 +145,165 @@
 		
 	}
 }
+
+// Template de lista de Programas
+
+.topnavigation a{
+	.bton-grey;
+	font-size:10px;
+	margin-top:-12px;
+	float:right;
+	margin-left:5px;
+	text-decoration:none;
+}
+
+.tablero-titulo{
+	.linear-gradient(#21caec,#0083ba,5%);
+	height:32px;
+	border-top:#055f7f 1px solid;
+	color:#fff;
+	line-height:32px;
+	padding-left:12px;
+}
+
+.breadcrumb{
+	height:35px;
+	padding-left:10px;
+	border-bottom:#dcdcdc 1px solid;
+	margin-bottom:0px;
+	.box-shadow(0, 8px, 6px,-5px,#efefef);
+
+	.orange{
+		.bton-bread-orange;
+		float:left;
+		padding:3px 8px;
+		font-size:12px;
+		text-decoration:none;
+		margin-top:5px;
+	}
+
+	.grey{
+		.bton-bread-grey;
+		float:left;
+		padding:3px 8px;
+		font-size:12px;
+		text-decoration:none;
+		margin-top:5px;
+	}
+
+	.arrow{
+		color:#aaa;
+		line-height:33px;
+		margin:0px 8px;
+		float: left;
+	}
+}
+
+.estadisticas{
+	text-align:right;
+	.info-block{
+		color:#6c6f68;
+	}
+}
+
+.iconindex-estadisticas{
+	padding-left:25px;
+	background:url(/files/img/estadisticas.png) no-repeat 50px 3px;
+}
+
+.programa-acordion{
+	.accordion-heading a{
+		background:none !important;
+		height:40px;
+		padding-left:0px !important;
+		color:#777;
+		.linear-gradient(#fff,#eee,25%) ;
+		.number{
+			font-size:20px;
+			float: left;
+			padding:5px;
+			color:#696051;
+			.text-shadow(0px,1px,0px,#fff);
+			.box-shadow(1px,1px,0px,#fff);
+			border-top:#e0e0e0 1px solid;
+			border-right:#e0e0e0 1px solid;
+			border-bottom:#e0e0e0 1px solid;
+			.linear-gradient(#fff8e2,#fde5a7,25%);
+			.rounded-corners-right(2px);
+		}
+		.nombre-programa{
+			float:left;
+			margin-left:10px;
+			line-height:40px;
+			font-weight:normal;
+			font-size:16px;
+		}
+	}
+	.estrategia-seleccion{
+		cursor:pointer;
+		background:none;
+		font-weight:normal;
+		border-bottom:#eee 1px solid;
+		padding:8px 8px 8px 10px;
+		display: block;
+		&:hover{
+			background:#fffff5;
+			-moz-box-shadow:    inset 0 0 4px #eee;
+   			-webkit-box-shadow: inset 0 0 4px #eee;
+   			box-shadow:         inset 0 0 4px #eee;
+		}
+	}
+	.nom-estrategia{
+			color:#038abf;
+			font-size:14px;
+	}
+	.accordion-inner{
+		padding:0px;
+	}
+}
+
+// Indicadores
+
+.indicador{
+	border:#b1b1b1 1px solid;
+	margin-top:20px;
+	.encabezado{
+		border-bottom:#b1b1b1 1px solid;
+		background-color: #f3f3f3;
+		border-top:#fff 1px solid;
+	}
+	.botones {
+		width:84px;
+		float:right;
+		a{
+			.bton-bread-grey;
+			float:left;
+			width:16px;
+			height:18px;
+			padding:5px 8px;
+			font-size:12px;
+			margin-left:5px;
+			text-decoration:none;
+			margin-top:4px;
+		}	
+	}
+	.titulo{
+		color:#0895C7;
+		padding:10px;
+		width:330px;
+		float:left;
+	}
+	.meta,.grafo{
+		padding:10px;
+		border-bottom:#b1b1b1 1px solid;
+	}
+	.subgrafo{
+		width:216px;
+		float: left;
+	}
+
+}
+
 //footer
 
 #footer{
