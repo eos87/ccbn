@@ -92,6 +92,13 @@ Created by: Byron Corrales Rivas | byroncorrales@gmail.com | @byroncor
 	background-image: linear-gradient(@start, @start @stop, @end);
 }
 
+.linear-gradient-half(@start,@end){
+    background: -moz-linear-gradient(top,#ffffff 0%,@end+50 50%,@end+30 50%,@end);
+    background: -webkit-gradient(linear, left top, left bottom, from(@start),color-stop(0.50, @end+50),color-stop(0.50, @end+30),to(@end));
+    border: 1px solid #949494;
+}
+
+
 /* General styles for shadows */
 
 .text-shadow(@hor: 0px, @vert: 0px, @blur: 5px, @shadow: #929292){

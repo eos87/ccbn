@@ -1,0 +1,117 @@
+{% extends "baseadmin.html"%}
+
+{%block contenido%}
+<div class="grid_12">
+	<div class="tablero-titulo">
+	TABLERO DE ESTADO PARA EL AÑO
+	</div>
+</div>
+<div class="grid_12">
+	<div class="breadcrumb">
+		<a href="/programas" class="orange">Programa</a>
+	</div>
+	<br>
+</div>
+
+<div class="grid_9">
+	<div class="programa-index-label">Selección de estrategias</div><br>
+	<div id="accordion2" class="accordion programa-acordion">
+	    <div class="accordion-group">
+	      <div class="accordion-heading">
+	        <a href="#collapseOne" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
+	          <div class="number">1</div>
+	          <div class="nombre-programa">Formación</div>
+	        </a>
+	      </div>
+	      <div class="accordion-body collapse" id="collapseOne">
+	        <div class="accordion-inner">
+				<a href="/indicadores" class="estrategia-seleccion">
+					Estrategia #1<br>
+					<div class="nom-estrategia">Educación básica de personas jovenes y adultas</div>
+				</a>
+				<a href="/indicadores" class="estrategia-seleccion">
+					Estrategia #2<br>
+					<div class="nom-estrategia">Formación técnica vocacional para personas adultas</div>
+				</a>
+				<a href="/indicadores" class="estrategia-seleccion">
+					Estrategia #3<br>
+					<div class="nom-estrategia">Formación artística</div>
+				</a>
+	        </div>
+	      </div>
+	    </div>
+	    <div class="accordion-group">
+	      <div class="accordion-heading">
+	        <a href="#collapseTwo" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
+	          <div class="number">2</div>
+	          <div class="nombre-programa">Educación integral de niños, niñas y adolescentes</div>
+	        </a>
+	      </div>
+	      <div class="accordion-body collapse" id="collapseTwo">
+	        <div class="accordion-inner">
+	          
+	        </div>
+	      </div>
+	    </div>
+	    <div class="accordion-group">
+	      <div class="accordion-heading">
+	        <a href="#collapseThree" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
+	          <div class="number">3</div>
+	          <div class="nombre-programa">Promoción Artística y Cultural</div>
+	        </a>
+	      </div>
+	      <div class="accordion-body collapse" id="collapseThree">
+	        <div class="accordion-inner">
+	          
+	        </div>
+	      </div>
+	    </div>
+	    <div class="accordion-group">
+	      <div class="accordion-heading">
+	        <a href="#collapsefour" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
+	          <div class="number">4</div>
+	          <div class="nombre-programa">Prevención de violencia basada en género y generacional</div>
+	        </a>
+	      </div>
+	      <div class="accordion-body collapse" id="collapsefour">
+	        <div class="accordion-inner">
+	          
+	        </div>
+	      </div>
+	    </div>
+	    <div class="accordion-group">
+	      <div class="accordion-heading">
+	        <a href="#collapsefive" data-parent="#accordion2" data-toggle="collapse" class="accordion-toggle">
+	          <div class="number">5</div>
+	          <div class="nombre-programa">Fortalecimiento institucional</div>
+	        </a>
+	      </div>
+	      <div class="accordion-body collapse" id="collapsefive">
+	        <div class="accordion-inner">
+	          
+	        </div>
+	      </div>
+	    </div>
+	</div>
+	<br><br><br><br><br>
+</div>
+<div class="grid_3 estadisticas">
+	<div class="title-block-index iconindex-estadisticas">Estadisticas Generales</div>
+	<p class="info-block">
+		<strong>Cursos:</strong> 22<br>
+		<strong>Estudiantes:</strong> 22<br>
+		<strong>Visita a Biblioteca:</strong> 22<br>
+	</p>
+</div>
+<div class="clear"></div>
+
+<script type="text/javascript">
+$(function() {
+        $('.alert').fadeOut(4000, function(){
+        	$('.alert').css('display', 'none');
+        });
+
+    });
+</script>
+
+{%endblock%}
