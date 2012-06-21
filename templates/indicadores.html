@@ -1,48 +1,64 @@
 {% extends "baseadmin.html"%}
 {%block extra_js%}
-  <script type="text/javascript" src="/files/js/RGraph/RGraph.common.core.js"></script>
-    <script src="/files/js/RGraph/RGraph.common.effects.js"></script>
-    <script src="/files/js/RGraph/RGraph.common.dynamic.js"></script>
-    <script src="/files/js/RGraph/RGraph.common.tooltips.js" ></script>
-    <script src="/files/js/RGraph/RGraph.hprogress.js"></script>
-    <script src="/files/js/RGraph/RGraph.common.key.js" ></script>
-  <script type="text/javascript">
+	<script type="text/javascript" src="/files/js/RGraph/RGraph.common.core.js"></script>
+	<script src="/files/js/RGraph/RGraph.common.effects.js"></script>
+	<script src="/files/js/RGraph/RGraph.common.dynamic.js"></script>
+	<script src="/files/js/RGraph/RGraph.common.tooltips.js" ></script>
+	<script src="/files/js/RGraph/RGraph.hprogress.js"></script>
+	<script src="/files/js/RGraph/RGraph.common.key.js" ></script>
+	<script type="text/javascript">
 	window.onload = function ()
-        {
-            var progress1 = new RGraph.HProgress('hprogress1',60, 125);
-            progress1.Set('chart.colors', ['#00cbee', '#f2efcd']);
-            progress1.Set('chart.key', ['Adultos inscritos 60','Meta 125 Alumnos']);
-            progress1.Set('chart.tooltips', ['Alumnos 60',]);
-            progress1.Set('chart.background.color', "#f2efcd");
-            progress1.Set('chart.units.post', '');
-            progress1.Set('chart.arrows', true);
-            progress1.Set('chart.gutter.top', 30);
-            progress1.Set('chart.gutter.bottom', 30);
-            progress1.Set('chart.tickmarks.inner', true);
-            progress1.Set('chart.numticks.inner', 20);
-            progress1.Set('chart.tickmarks.zerostart', true);
-            progress1.Set('chart.text.color', '#4a4c48');
-            progress1.Set('chart.text.size', 9);
-            progress1.Draw();
+	    {
+	        var progress1 = new RGraph.HProgress('hprogress1',60, 125);
+	        progress1.Set('chart.colors', ['#00cbee', '#f2efcd']);
+	        progress1.Set('chart.key', ['Adultos inscritos 60','Meta 125 Alumnos']);
+	        progress1.Set('chart.tooltips', ['Alumnos 60',]);
+	        progress1.Set('chart.background.color', "#f2efcd");
+	        progress1.Set('chart.units.post', '');
+	        progress1.Set('chart.arrows', true);
+	        progress1.Set('chart.gutter.top', 30);
+	        progress1.Set('chart.gutter.bottom', 30);
+	        progress1.Set('chart.tickmarks.inner', true);
+	        progress1.Set('chart.numticks.inner', 20);
+	        progress1.Set('chart.tickmarks.zerostart', true);
+	        progress1.Set('chart.text.color', '#4a4c48');
+	        progress1.Set('chart.text.size', 9);
+	        progress1.Set('chart.strokestyle.inner', '#999');
+	        progress1.Set('chart.strokestyle.outer', '#999');
+	        progress1.Draw();
 
-            var progress2 = new RGraph.HProgress('hprogress2',25, 100);
-            progress2.Set('chart.colors', ['#00cbee', '#f2efcd']);
-            progress2.Set('chart.key', ['Menores inscritos 25','Meta 100 Alumnos']);
-            progress2.Set('chart.tooltips', ['Alumnos 25',]);
-            progress2.Set('chart.background.color', "#f2efcd");
-            progress2.Set('chart.units.post', '');
-            progress2.Set('chart.arrows', true);
-            progress2.Set('chart.gutter.top', 30);
-            progress2.Set('chart.gutter.bottom', 30);
-            progress2.Set('chart.tickmarks.inner', true);
-            progress2.Set('chart.numticks.inner', 20);
-            progress2.Set('chart.tickmarks.zerostart', true);
-            progress2.Set('chart.text.color', '#4a4c48');
-            progress2.Set('chart.text.size', 9);
-            progress2.Draw();
-
-         }
-  </script>
+	        var progress2 = new RGraph.HProgress('hprogress2',25, 100);
+	        progress2.Set('chart.colors', ['#00cbee', '#f2efcd']);
+	        progress2.Set('chart.key', ['Menores inscritos 25','Meta 100 Alumnos']);
+	        progress2.Set('chart.tooltips', ['Alumnos 25',]);
+	        progress2.Set('chart.background.color', "#f2efcd");
+	        progress2.Set('chart.units.post', '');
+	        progress2.Set('chart.arrows', true);
+	        progress2.Set('chart.gutter.top', 30);
+	        progress2.Set('chart.gutter.bottom', 30);
+	        progress2.Set('chart.tickmarks.inner', true);
+	        progress2.Set('chart.numticks.inner', 20);
+	        progress2.Set('chart.tickmarks.zerostart', true);
+	        progress2.Set('chart.text.color', '#4a4c48');
+	        progress2.Set('chart.text.size', 9);
+	        progress1.Set('chart.strokestyle.inner', '#999');
+	        progress1.Set('chart.strokestyle.outer', '#999');
+	        progress2.Draw();
+	     }
+	</script>
+	<script type="text/javascript">
+		function mostrar_tabla(id){
+			$(id +' .modo-tabla').show('slow');
+			$(id +' .modo-grafico').hide('slow');
+		}
+		function mostrar_grafico(id){
+			$(id +' .modo-tabla').hide('slow');
+			$(id +' .modo-grafico').show('slow');
+		}
+	</script>
+	<style type="text/css">
+		.modo-tabla{display: none;}
+	</style>
 {%endblock%}
 {%block contenido%}
 <div class="grid_12">
@@ -60,126 +76,274 @@
 	</div>
 </div>
 <div class="grid_6">
-	<div class="indicador">
+	{# El id de la siguiente div debe ser el id del indicador #}
+	<div id="num1" class="indicador">
 		<div class="encabezado">
-			<div class="titulo">Personas integradas en los cursos </div>
+			<div class="titulo">3.1a Personas integradas en los cursos </div>
 			<div class="botones">
-				<a href="#"><img src="/files/img/grafoicon.png"></a>
-				<a href="#"><img src="/files/img/gridicon.png"></a>
+				{# Se debe mandar como parametro el id del indicador #}
+				<a onclick="mostrar_grafico('#num1')" href="javascript:void(0);"><img src="/files/img/grafoicon.png"></a>
+				<a onclick="mostrar_tabla('#num1')" href="javascript:void(0);"><img src="/files/img/gridicon.png"></a>
 			</div>
 			<div class="clear"></div>
 		</div>
-		<div class="meta">
-			<strong>Alumnos en cursos</strong>
-			<canvas id="hprogress1" width="420" height="75">[No canvas support]</canvas>
-		</div>
-		<div class="meta">
-			<strong>Menores de 14 años en cursos</strong>
-			<canvas id="hprogress2" width="420" height="75">[No canvas support]</canvas>
-		</div>
-		<div class="grafo">
-			<div class="subgrafo">
-				<strong>Distribucion por sexo real</strong>
-				<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:60,40&chl=H 60%|M 40%"></center>
+		<div class="modo-grafico">
+			<div class="meta">
+				<strong>Alumnos en cursos</strong>
+				<canvas id="hprogress1" width="420" height="75">[No canvas support]</canvas>
 			</div>
-			<div class="subgrafo">
-				<strong>Distribucion por sexo Meta</strong>
-				<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:30,70&chl=H 30%|M 70%"></center>
+			<div class="meta">
+				<strong>Menores de 14 años en cursos</strong>
+				<canvas id="hprogress2" width="420" height="75">[No canvas support]</canvas>
 			</div>
-			<div class="clear"></div>
+			<div class="grafo">
+				<div class="subgrafo">
+					<strong>Distribucion por sexo real</strong>
+					<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:60,40&chl=H 60%|M 40%"></center>
+				</div>
+				<div class="subgrafo">
+					<strong>Distribucion por sexo Meta</strong>
+					<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:30,70&chl=H 30%|M 70%"></center>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="modo-tabla">
+			<table class="table table-bordered table-condensed">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Actual</th>
+						<th>Meta</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Alumnos en cursos</td>
+						<td>60</td>
+						<td>125</td>
+					</tr>
+					<tr>
+						<td>Menores de 18 años en cursos</td>
+						<td>25</td>
+						<td>100</td>
+					</tr>
+					<tr>
+						<td>Hombres en Cursos</td>
+						<td>60%</td>
+						<td>30%</td>
+					</tr>
+					<tr>
+						<td>Mujeres en Cursos</td>
+						<td>40%</td>
+						<td>60%</td>
+					</tr>
+				</tbody>
+    		</table>
 		</div>
 	</div>
 </div>
 <div class="grid_6">
-	<div class="indicador">
+	{# El id de la siguiente div debe ser el id del indicador #}
+	<div id="num2" class="indicador">
 		<div class="encabezado">
-			<div class="titulo">Personas integradas en los cursos </div>
+			<div class="titulo">3.1a Personas integradas en los cursos </div>
 			<div class="botones">
-				<a href="#"><img src="/files/img/grafoicon.png"></a>
-				<a href="#"><img src="/files/img/gridicon.png"></a>
+				{# Se debe mandar como parametro el id del indicador #}
+				<a onclick="mostrar_grafico('#num2')" href="javascript:void(0);"><img src="/files/img/grafoicon.png"></a>
+				<a onclick="mostrar_tabla('#num2')" href="javascript:void(0);"><img src="/files/img/gridicon.png"></a>
 			</div>
 			<div class="clear"></div>
 		</div>
-		<div class="meta">
-			<strong>Alumnos en cursos</strong>
-			<canvas id="hprogress1" width="420" height="75">[No canvas support]</canvas>
-		</div>
-		<div class="meta">
-			<strong>Menores de 14 años en cursos</strong>
-			<canvas id="hprogress2" width="420" height="75">[No canvas support]</canvas>
-		</div>
-		<div class="grafo">
-			<div class="subgrafo">
-				<strong>Distribucion por sexo real</strong>
-				<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:60,40&chl=H 60%|M 40%"></center>
+		<div class="modo-grafico">
+			<div class="meta">
+				<strong>Alumnos en cursos</strong>
+				<canvas id="hprogress1" width="420" height="75">[No canvas support]</canvas>
 			</div>
-			<div class="subgrafo">
-				<strong>Distribucion por sexo Meta</strong>
-				<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:30,70&chl=H 30%|M 70%"></center>
+			<div class="meta">
+				<strong>Menores de 14 años en cursos</strong>
+				<canvas id="hprogress2" width="420" height="75">[No canvas support]</canvas>
 			</div>
-			<div class="clear"></div>
+			<div class="grafo">
+				<div class="subgrafo">
+					<strong>Distribucion por sexo real</strong>
+					<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:60,40&chl=H 60%|M 40%"></center>
+				</div>
+				<div class="subgrafo">
+					<strong>Distribucion por sexo Meta</strong>
+					<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:30,70&chl=H 30%|M 70%"></center>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="modo-tabla">
+			<table class="table table-bordered table-condensed">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Actual</th>
+						<th>Meta</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Alumnos en cursos</td>
+						<td>60</td>
+						<td>125</td>
+					</tr>
+					<tr>
+						<td>Menores de 18 años en cursos</td>
+						<td>25</td>
+						<td>100</td>
+					</tr>
+					<tr>
+						<td>Hombres en Cursos</td>
+						<td>60%</td>
+						<td>30%</td>
+					</tr>
+					<tr>
+						<td>Mujeres en Cursos</td>
+						<td>40%</td>
+						<td>60%</td>
+					</tr>
+				</tbody>
+    		</table>
 		</div>
 	</div>
 </div>
 <div class="grid_6">
-	<div class="indicador">
+	{# El id de la siguiente div debe ser el id del indicador #}
+	<div id="num3" class="indicador">
 		<div class="encabezado">
-			<div class="titulo">Personas integradas en los cursos </div>
+			<div class="titulo">3.1a Personas integradas en los cursos </div>
 			<div class="botones">
-				<a href="#"><img src="/files/img/grafoicon.png"></a>
-				<a href="#"><img src="/files/img/gridicon.png"></a>
+				{# Se debe mandar como parametro el id del indicador #}
+				<a onclick="mostrar_grafico('#num3')" href="javascript:void(0);"><img src="/files/img/grafoicon.png"></a>
+				<a onclick="mostrar_tabla('#num3')" href="javascript:void(0);"><img src="/files/img/gridicon.png"></a>
 			</div>
 			<div class="clear"></div>
 		</div>
-		<div class="meta">
-			<strong>Alumnos en cursos</strong>
-			<canvas id="hprogress1" width="420" height="75">[No canvas support]</canvas>
-		</div>
-		<div class="meta">
-			<strong>Menores de 14 años en cursos</strong>
-			<canvas id="hprogress2" width="420" height="75">[No canvas support]</canvas>
-		</div>
-		<div class="grafo">
-			<div class="subgrafo">
-				<strong>Distribucion por sexo real</strong>
-				<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:60,40&chl=H 60%|M 40%"></center>
+		<div class="modo-grafico">
+			<div class="meta">
+				<strong>Alumnos en cursos</strong>
+				<canvas id="hprogress1" width="420" height="75">[No canvas support]</canvas>
 			</div>
-			<div class="subgrafo">
-				<strong>Distribucion por sexo Meta</strong>
-				<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:30,70&chl=H 30%|M 70%"></center>
+			<div class="meta">
+				<strong>Menores de 14 años en cursos</strong>
+				<canvas id="hprogress2" width="420" height="75">[No canvas support]</canvas>
 			</div>
-			<div class="clear"></div>
+			<div class="grafo">
+				<div class="subgrafo">
+					<strong>Distribucion por sexo real</strong>
+					<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:60,40&chl=H 60%|M 40%"></center>
+				</div>
+				<div class="subgrafo">
+					<strong>Distribucion por sexo Meta</strong>
+					<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:30,70&chl=H 30%|M 70%"></center>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="modo-tabla">
+			<table class="table table-bordered table-condensed">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Actual</th>
+						<th>Meta</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Alumnos en cursos</td>
+						<td>60</td>
+						<td>125</td>
+					</tr>
+					<tr>
+						<td>Menores de 18 años en cursos</td>
+						<td>25</td>
+						<td>100</td>
+					</tr>
+					<tr>
+						<td>Hombres en Cursos</td>
+						<td>60%</td>
+						<td>30%</td>
+					</tr>
+					<tr>
+						<td>Mujeres en Cursos</td>
+						<td>40%</td>
+						<td>60%</td>
+					</tr>
+				</tbody>
+    		</table>
 		</div>
 	</div>
 </div>
 <div class="grid_6">
-	<div class="indicador">
+	{# El id de la siguiente div debe ser el id del indicador #}
+	<div id="num4" class="indicador">
 		<div class="encabezado">
-			<div class="titulo">Personas integradas en los cursos </div>
+			<div class="titulo">3.1a Personas integradas en los cursos </div>
 			<div class="botones">
-				<a href="#"><img src="/files/img/grafoicon.png"></a>
-				<a href="#"><img src="/files/img/gridicon.png"></a>
+				{# Se debe mandar como parametro el id del indicador #}
+				<a onclick="mostrar_grafico('#num4')" href="javascript:void(0);"><img src="/files/img/grafoicon.png"></a>
+				<a onclick="mostrar_tabla('#num4')" href="javascript:void(0);"><img src="/files/img/gridicon.png"></a>
 			</div>
 			<div class="clear"></div>
 		</div>
-		<div class="meta">
-			<strong>Alumnos en cursos</strong>
-			<canvas id="hprogress1" width="420" height="75">[No canvas support]</canvas>
-		</div>
-		<div class="meta">
-			<strong>Menores de 14 años en cursos</strong>
-			<canvas id="hprogress2" width="420" height="75">[No canvas support]</canvas>
-		</div>
-		<div class="grafo">
-			<div class="subgrafo">
-				<strong>Distribucion por sexo real</strong>
-				<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:60,40&chl=H 60%|M 40%"></center>
+		<div class="modo-grafico">
+			<div class="meta">
+				<strong>Alumnos en cursos</strong>
+				<canvas id="hprogress1" width="420" height="75">[No canvas support]</canvas>
 			</div>
-			<div class="subgrafo">
-				<strong>Distribucion por sexo Meta</strong>
-				<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:30,70&chl=H 30%|M 70%"></center>
+			<div class="meta">
+				<strong>Menores de 14 años en cursos</strong>
+				<canvas id="hprogress2" width="420" height="75">[No canvas support]</canvas>
 			</div>
-			<div class="clear"></div>
+			<div class="grafo">
+				<div class="subgrafo">
+					<strong>Distribucion por sexo real</strong>
+					<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:60,40&chl=H 60%|M 40%"></center>
+				</div>
+				<div class="subgrafo">
+					<strong>Distribucion por sexo Meta</strong>
+					<center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:30,70&chl=H 30%|M 70%"></center>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="modo-tabla">
+			<table class="table table-bordered table-condensed">
+				<thead>
+					<tr>
+						<th></th>
+						<th>Actual</th>
+						<th>Meta</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>Alumnos en cursos</td>
+						<td>60</td>
+						<td>125</td>
+					</tr>
+					<tr>
+						<td>Menores de 18 años en cursos</td>
+						<td>25</td>
+						<td>100</td>
+					</tr>
+					<tr>
+						<td>Hombres en Cursos</td>
+						<td>60%</td>
+						<td>30%</td>
+					</tr>
+					<tr>
+						<td>Mujeres en Cursos</td>
+						<td>40%</td>
+						<td>60%</td>
+					</tr>
+				</tbody>
+    		</table>
 		</div>
 	</div>
 </div>
