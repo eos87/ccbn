@@ -59,7 +59,7 @@ def parse_filters(qs):
 
 def salidas_list(request):
     modulos = Modulo.objects.all()
-    return render_to_response('index2.html', RequestContext(request, locals()))
+    return render_to_response('sel_programa.html', RequestContext(request, locals()))
 
 def salida_detail(request, id=None):
     if id:

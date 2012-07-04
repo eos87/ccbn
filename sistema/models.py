@@ -37,6 +37,7 @@ class SubModulo(models.Model):
         return u'%s' % self.nombre
 
 class Estrategia(models.Model):
+    numero = models.CharField(max_length=100)
     nombre = models.TextField()
     programa = models.ForeignKey(Modulo)
 
