@@ -27,11 +27,10 @@
 		      <div class="accordion-body collapse" id="{{programa.id}}">
 		        <div class="accordion-inner">
 		        	{% for estrategia in programa.estrategia_set.all %}
-						<a href="/indicadores" class="estrategia-seleccion">
-							Estrategia #{{estrategia.numero}}<br>
+						<a href="{% url ccbn.views.estrategia_detail estrategia.id %}" class="estrategia-seleccion">
+							Estrategia {{estrategia.id}}<br>
 							<div class="nom-estrategia">{{estrategia.nombre}}</div>
 						</a>
-
 					{%endfor%}
 		        </div>
 		      </div>

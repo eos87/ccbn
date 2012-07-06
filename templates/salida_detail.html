@@ -2,9 +2,37 @@
 {% load ccbn_tags %}
 
 {% block contenido %}
-{{salida.titulo}}<br>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="/files/js/bowser.min.js"></script>
+<script type="text/javascript" src="/files/js/jquery.graph.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#grafo_{{salida.id}}').progressChart({
+            'meta': {{salida.meta}},
+            'reached': {{result}},
+            'parent_color': 'blue, #006699',
+            'height': '30px',
+            'font_size': 22
+        });
+    });    
+</script>
+<script type="text/javascript">
+    function mostrar_tabla(id){
+        $(id +' .modo-tabla').show('slow');
+        $(id +' .modo-grafico').hide('slow');
+    }
+    function mostrar_grafico(id){
+        $(id +' .modo-tabla').hide('slow');
+        $(id +' .modo-grafico').show('slow');
+    }
+</script>
+<style type="text/css">
+    .modo-tabla{display: none;}
+</style>
+
 Meta: {{salida.meta}}<br>
 Actual: {{result}} {{salida.meta_symbol}}
+
 <hr>
 {% if salida.querysplit_set.all %}
 Submetas:<br>
@@ -13,4 +41,74 @@ Submetas:<br>
     actual: {{splits_dicc|get_value:split.id}} {{split.meta_symbol}}<br>
     {% endfor %}
 {% endif %}
+
+
+<div class="grid_6">
+    {# El id de la siguiente div debe ser el id del indicador #}
+    <div id="num1" class="indicador">
+        <div class="encabezado">
+            <div class="titulo">{{salida.titulo}}</div>
+            <div class="botones">
+                {# Se debe mandar como parametro el id del indicador #}
+                <a onclick="mostrar_grafico('#num1')" href="javascript:void(0);"><img src="/files/img/grafoicon.png"></a>
+                <a onclick="mostrar_tabla('#num1')" href="javascript:void(0);"><img src="/files/img/gridicon.png"></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="modo-grafico">
+            <div class="meta">
+                <strong>Alumnos en cursos</strong>
+                <div id="grafo_{{salida.id}}"></div>
+            </div>
+            <div class="meta">
+                <strong>Menores de 14 años en cursos</strong>
+                <canvas id="hprogress2" width="420" height="75">[No canvas support]</canvas>
+            </div>
+            <div class="grafo">
+                <div class="subgrafo">
+                    <strong>Distribucion por sexo real</strong>
+                    <center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:60,40&chl=H 60%|M 40%"></center>
+                </div>
+                <div class="subgrafo">
+                    <strong>Distribucion por sexo Meta</strong>
+                    <center><img src="https://chart.googleapis.com/chart?cht=p&chs=210x100&chd=t:30,70&chl=H 30%|M 70%"></center>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+        <div class="modo-tabla">
+            <table class="table table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Actual</th>
+                        <th>Meta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Alumnos en cursos</td>
+                        <td>60</td>
+                        <td>125</td>
+                    </tr>
+                    <tr>
+                        <td>Menores de 18 años en cursos</td>
+                        <td>25</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>Hombres en Cursos</td>
+                        <td>60%</td>
+                        <td>30%</td>
+                    </tr>
+                    <tr>
+                        <td>Mujeres en Cursos</td>
+                        <td>40%</td>
+                        <td>60%</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load ccbn_tags %}
+
+{% block title %}{{estrategia.nombre}}{% endblock %}
+
+{% block extra_js %}
+<script type="text/javascript" src="/files/js/bowser.min.js"></script>
+<script type="text/javascript" src="/files/js/jquery.graph.min.js"></script>
+{% endblock %}
+
+{% block contenido %}
+<div class="grid_12">
+	<div class="tablero-titulo">
+	TABLERO DE ESTADO PARA EL AÑO
+	</div>
+</div>
+
+<div class="grid_12">
+	<div class="breadcrumb">
+		<a href="/programas/" class="grey">Programa</a>
+		<a class="arrow">&rarr;</a> 
+		<a href="/programas/#" class="grey">{{estrategia.programa}}</a> 
+		<a class="arrow">&rarr;</a> 
+		<a href="/programas/{{estrategia.id}}/" class="orange">{{estrategia.nombre}}</a>
+	</div>
+</div>
+
+{% for obj in estrategia.salida_set.all %}
+	{% render_salida obj %}
+{% endfor %}
+{% endblock %}

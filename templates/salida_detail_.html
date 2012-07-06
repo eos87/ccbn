@@ -1,0 +1,97 @@
+{% load ccbn_tags %}
+
+<script type="text/javascript">
+    function mostrar_tabla(id){
+        $(id +' .modo-tabla').show('slow');
+        $(id +' .modo-grafico').hide('slow');
+    }
+    function mostrar_grafico(id){
+        $(id +' .modo-tabla').hide('slow');
+        $(id +' .modo-grafico').show('slow');
+    }
+</script>
+<style type="text/css">
+    .modo-tabla{display: none;}
+</style>
+
+<div class="grid_6">
+    {# El id de la siguiente div debe ser el id del indicador #}
+    <div id="num{{salida.id}}" class="indicador">
+        <div class="encabezado">
+            <div class="titulo">{{salida.titulo}}</div>
+            <div class="botones">
+                {# Se debe mandar como parametro el id del indicador #}
+                <a onclick="mostrar_grafico('#num{{salida.id}}')" href="javascript:void(0);"><img src="/files/img/grafoicon.png"></a>
+                <a onclick="mostrar_tabla('#num{{salida.id}}')" href="javascript:void(0);"><img src="/files/img/gridicon.png"></a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="modo-grafico">
+            <div class="meta">
+                <strong>Meta: {{salida.meta}} | Actual: {{result}}</strong>
+                <div id="grafo_{{salida.id}}"></div>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('#grafo_{{salida.id}}').progressChart({
+                            'meta'          : {{salida.meta}},
+                            'reached'       : {{result}},
+                            'parent_color'  : 'blue, #006699',
+                            'height'        : '30px',
+                            'font_size'     : 22,
+                            'symbol'        : '{{salida.meta_symbol}}'
+                        });
+                    });    
+                </script>
+            </div>
+            {% if salida.querysplit_set.all %}
+            {% for split in salida.querysplit_set.all %}
+            <div class="meta">
+                <strong>
+                    Submeta: {{split.meta}} {{split.meta_symbol}} {{split.getlabel}} | Actual: {{splits_dicc|get_value:split.id}} {{split.meta_symbol}}
+                </strong>
+                <div id="grafo_split_{{split.id}}"></div>
+                <script type="text/javascript">
+                    $(document).ready(function(){
+                        $('#grafo_split_{{split.id}}').progressChart({
+                            'meta'          : {{split.meta}},
+                            'reached'       : {{splits_dicc|get_value:split.id}},
+                            'parent_color'  : 'blue, #006699',
+                            'height'        : '30px',
+                            'font_size'     : 22,
+                            'symbol'        : '{{split.meta_symbol}}'
+                        });
+                    });
+                </script>
+            </div>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="modo-tabla">
+            <table class="table table-bordered table-condensed">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Actual</th>
+                        <th>Meta</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Meta principal</td>
+                        <td>{{result}}{{salida.meta_symbol}}</td>
+                        <td>{{salida.meta}}{{salida.meta_symbol}}</td>
+                    </tr>
+                    {% if salida.querysplit_set.all %}
+                    {% for split in salida.querysplit_set.all %}
+                    <tr>
+                        <td>{{split.label}}</td>
+                        <td>{{splits_dicc|get_value:split.id}}{{split.meta_symbol}}</td>
+                        <td>{{split.meta}}{{split.meta_symbol}}</td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

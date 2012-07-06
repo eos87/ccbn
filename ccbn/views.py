@@ -6,8 +6,12 @@ from django.template import RequestContext
 from django.utils import simplejson
 from django.db.models.fields import CharField, IntegerField
 from django.db.models.fields.related import ForeignKey
-from sistema.models import Salida, Modulo
+from sistema.models import Salida, Modulo, Estrategia
 from ccbn.utils import get_porcentaje
+
+def testing(request):
+    modulos = Modulo.objects.all()
+    return render_to_response('index2.html', RequestContext(request, locals()))
 
 def endswith(x, value):
     if x.endswith(value): 
@@ -64,30 +68,38 @@ def salidas_list(request):
 def salida_detail(request, id=None):
     if id:
         salida = get_object_or_404(Salida, id=id)
-        app_label, model = salida.model.split(',')
-        model = get_model(app_label, model)
-        base = model.objects
-        filters_qs = salida.filter_set.all()
+        locals_vars = parse_salida(salida)
+    return render_to_response('salida_detail.html', RequestContext(request, locals_vars))
 
-        if filters_qs:
-            query = base.filter(**parse_filters(filters_qs))
-        else:
-            query = base
+def parse_salida(salida):
+    app_label, model = salida.model.split(',')
+    model = get_model(app_label, model)
+    base = model.objects
+    filters_qs = salida.filter_set.all()
 
-        if salida.tipo_meta == 1: # percent
-            total = base.count()
-            cantidad = query.count()
-            result = get_porcentaje(total, cantidad)
-        elif salida.tipo_meta == 2: # count
-            result = query.count()
+    if filters_qs:
+        query = base.filter(**parse_filters(filters_qs))
+    else:
+        query = base
 
-        # verificando splits y obteniendo valores
-        splits_dicc = {}
-        for split in salida.querysplit_set.all():
-            sub_qs = query.filter(**{split.field:split.value})
-            if split.tipo_meta == 1: # percent                
-                splits_dicc[split.id] = get_porcentaje(query.count(), sub_qs.count())
-            elif split.tipo_meta == 2: # count
-                splits_dicc[split.id] = sub_qs.count()
+    if salida.tipo_meta == 1: # percent
+        total = base.count()
+        cantidad = query.count()
+        result = get_porcentaje(total, cantidad)
+    elif salida.tipo_meta == 2: # count
+        result = query.count()
 
-    return render_to_response('salida_detail.html', RequestContext(request, locals()))
+    # verificando splits y obteniendo valores
+    splits_dicc = {}
+    for split in salida.querysplit_set.all():
+        sub_qs = query.filter(**{split.field:split.value})
+        if split.tipo_meta == 1: # percent                
+            splits_dicc[split.id] = get_porcentaje(query.count(), sub_qs.count())
+        elif split.tipo_meta == 2: # count
+            splits_dicc[split.id] = sub_qs.count()
+
+    return locals()
+
+def estrategia_detail(request, id):
+    estrategia = get_object_or_404(Estrategia, id=id)
+    return render_to_response('estrategia_detail.html', RequestContext(request, locals()))
