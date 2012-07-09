@@ -74,7 +74,6 @@ def salida_detail(request, id=None):
         locals_vars = parse_salida(salida)
     return render_to_response('salida_detail.html', RequestContext(request, locals_vars))
 
-@login_required
 def parse_salida(salida):
     app_label, model = salida.model.split(',')
     model = get_model(app_label, model)
@@ -104,6 +103,7 @@ def parse_salida(salida):
 
     return locals()
 
+@login_required
 def estrategia_detail(request, id):
     estrategia = get_object_or_404(Estrategia, id=id)
     return render_to_response('estrategia_detail.html', RequestContext(request, locals()))
