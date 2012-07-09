@@ -8,6 +8,7 @@ from django.db.models.fields import CharField, IntegerField
 from django.db.models.fields.related import ForeignKey
 from sistema.models import Salida, Modulo, Estrategia
 from ccbn.utils import get_porcentaje
+from django.contrib.auth.decorators import login_required
 
 def testing(request):
     modulos = Modulo.objects.all()
@@ -61,16 +62,19 @@ def parse_filters(qs):
     
     return dicc
 
+@login_required
 def salidas_list(request):
     modulos = Modulo.objects.all()
     return render_to_response('sel_programa.html', RequestContext(request, locals()))
 
+@login_required
 def salida_detail(request, id=None):
     if id:
         salida = get_object_or_404(Salida, id=id)
         locals_vars = parse_salida(salida)
     return render_to_response('salida_detail.html', RequestContext(request, locals_vars))
 
+@login_required
 def parse_salida(salida):
     app_label, model = salida.model.split(',')
     model = get_model(app_label, model)

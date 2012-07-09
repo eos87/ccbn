@@ -5,7 +5,7 @@
 	<div class="grid_6 prefix_3 suffix_3 loginform">
 		{% if user.username %}
 		<div class ="user-logueado">
-		Hola {{user}} <center><a href="/admin">Ir a la Administración</a></center>
+		Hola {{user}} <center><a href="/programas">Ir a Programas</a></center>
 		</div>
 		{% else %}
 		 <form method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}

@@ -28,7 +28,7 @@
 		        <div class="accordion-inner">
 		        	{% for estrategia in programa.estrategia_set.all %}
 						<a href="{% url ccbn.views.estrategia_detail estrategia.id %}" class="estrategia-seleccion">
-							Estrategia {{estrategia.id}}<br>
+							Estrategia {{estrategia.numero}}<br>
 							<div class="nom-estrategia">{{estrategia.nombre}}</div>
 						</a>
 					{%endfor%}
