@@ -95,7 +95,7 @@ def parse_salida(salida):
     # verificando splits y obteniendo valores
     splits_dicc = {}
     for split in salida.querysplit_set.all():
-        sub_qs = query.filter(**{split.field:split.value})
+        sub_qs = query.filter(**{'%s%s' % (split.field, split.criteria):split.value})
         if split.tipo_meta == 1: # percent                
             splits_dicc[split.id] = get_porcentaje(query.count(), sub_qs.count())
         elif split.tipo_meta == 2: # count

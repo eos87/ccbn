@@ -90,6 +90,7 @@ class Filter(models.Model):
 class QuerySplit(models.Model):
     salida = models.ForeignKey(Salida)
     field = models.CharField(max_length=50, default='')
+    criteria = models.CharField(max_length=30, default='', choices=CRITERIA_CHOICE, blank=True)
     value = models.CharField(max_length=50)
     meta = models.IntegerField()
     tipo_meta = models.IntegerField(choices=META_CHOICE, blank=True, null=True)
