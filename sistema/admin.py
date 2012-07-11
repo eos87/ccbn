@@ -50,6 +50,8 @@ class QuerySplitInline(admin.TabularInline):
     form = FilterForm
 
 class SalidaAdmin(admin.ModelAdmin):
+    search_fields = ['titulo', 'id', 'estrategia__nombre']
+    list_filter = ['estrategia__programa', 'estrategia']
     inlines = [FilterInline, QuerySplitInline]
 
 admin.site.register(Salida, SalidaAdmin)
