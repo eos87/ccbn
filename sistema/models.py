@@ -65,6 +65,9 @@ class Salida(models.Model):
     def __unicode__(self):
         return u'%s' % self.titulo
 
+    class Meta:
+        ordering = ['estrategia__id', 'id']
+
     @models.permalink
     def get_absolute_url(self):
         return ('ccbn.views.salida_detail', [self.id])
