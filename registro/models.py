@@ -336,7 +336,7 @@ class RegistroBecaPrimaria(BaseRegistroAnual):
 class RegistroBecaSecundaria(BaseRegistroAnual):
     beca = models.ForeignKey(BecaSecundaria, verbose_name = u'Beca secundaria')
     servicio_social = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
-    esp_propos = models.IntegerField(blank=True, null=True)
+    esp_propos = models.IntegerField(blank=True, null=True, verbose_name=u'Espíritu propositivo')
     promotor = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
     solidario_famila = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
     solidario_centro = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
@@ -350,7 +350,7 @@ class RegistroBecaSecundaria(BaseRegistroAnual):
 class RegistroBecaUniversitaria(BaseRegistroAnual):
     beca = models.ForeignKey(BecaUniversitaria, verbose_name = u'Beca universitaria')
     servicio_social = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
-    esp_propos = models.IntegerField(choices=SI_NO_CHOICE,blank=True, null=True)
+    esp_propos = models.IntegerField(choices=SI_NO_CHOICE,blank=True, null=True, verbose_name=u'Espíritu propositivo')
     promotor = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
     solidario_famila = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
     solidario_centro = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
