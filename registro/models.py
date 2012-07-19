@@ -270,6 +270,7 @@ CHOICE_MEJORA = ((1, 'Bastante'), (2, 'Algo'), (3, 'Poco'), (4, 'Nada'))
 CHOICE_MEJORA_VIDA = ((1, u'Muy útil'), (2, u'Útil'), (3, u'Poco útil'), (4, u'Nada útil'))
 CHOICE_CALIDAD = ((1, 'Excelente'), (2, 'Bueno'), (3, 'Regular'), (4, 'Malo'))
 CHOICE_METODOLOGIA = CHOICE_CALIDAD
+CHOICE_APORTE = ((1, u'Muy útil'), (2, u'Útil'), (3, u'Poco útil'), (4, u'Nada útil'))
 
 class InscripcionCurso(models.Model):
     persona = models.ForeignKey(Persona)
@@ -283,6 +284,7 @@ class InscripcionCurso(models.Model):
     calificacion = models.IntegerField(help_text='Al final del curso', 
                                        blank=True, null=True, choices=CHOICE_CALIFICACION)
     mejora_autoestima = models.IntegerField(blank=True, null=True, choices=CHOICE_MEJORA)
+    aporte_sociedad = models.IntegerField(blank=True, null=True, choices=CHOICE_APORTE, verbose_name=u'Aporte a sociedad, familia y comunidad')
     mejora_vida = models.IntegerField(blank=True, null=True, choices=CHOICE_MEJORA_VIDA)
     calidad_contenido = models.IntegerField(blank=True, null=True, choices=CHOICE_CALIDAD)
     metodologia = models.IntegerField(blank=True, null=True, choices=CHOICE_METODOLOGIA)
