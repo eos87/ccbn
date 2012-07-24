@@ -3,8 +3,8 @@ from django.db import models
 from registro.models import Persona
 
 CHOICE_ACTIVIDAD = (('ConsultaInline', u'Consulta de libros'),
-                    ('PrestamoInline', u'Prestamo de libro'),
-                    ('RetornoInline', u'Retorno de libro'),
+                    ('PrestamoInline', u'Préstamo de libros'),
+                    ('RetornoInline', u'Retorno de libros'),
                     ('ServicioInline', u'Servicio Bibliotecario'))
 
 CHOICE_CATEGORIA = ((1, u'000 - Generalidades'), (2, u'100 - Filosofía y Psicología'),
@@ -77,7 +77,7 @@ class Prestamo(models.Model):
         return u'%s' % self.id
 
     class Meta:
-        verbose_name_plural = u'Prestamos'
+        verbose_name_plural = u'Préstamos'
 
 class Retorno(models.Model):
     actividad = models.ForeignKey(ActividadIndividual)

@@ -8,7 +8,7 @@ class RelacionInline(admin.TabularInline):
     model = Relacion
     fk_name = 'owner'
     extra = 1
-    verbose_name_plural = u'Personas de su hogar que esten en CCBN'
+    verbose_name_plural = u'Personas de su hogar que estén en CCBN'
 
 class ModuloPersonaInline(admin.StackedInline):
     meh = 'redirect_indicator'
@@ -138,7 +138,7 @@ class BasePromocionInline(admin.TabularInline):
 
 class RegistroMusicaInline(BasePromocionInline):
     model = RegistroMusica    
-    verbose_name_plural = u'Registro grupo de musica'
+    verbose_name_plural = u'Registro grupo de música'
 
 class RegistroTeatroInline(BasePromocionInline):
     model = RegistroTeatro
