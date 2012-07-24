@@ -4,7 +4,7 @@ from ccbn.utils import generate_years_choice
 import datetime
 #from promocion.models import CHOICE_SENSIBILIZACION, CHOICE_APROPIACION
 
-CHOICE_SENSIBILIZACION = ((1, 'Democracia'), (2, 'Participacion Ciudadana'), (3, 'Equidad de genero'),
+CHOICE_SENSIBILIZACION = ((1, 'Democracia'), (2, 'Participación Ciudadana'), (3, 'Equidad de genero'),
                           (4, 'Medio ambiente'), (5, 'Derechos Humanos'), (6, 'Solidaridad'))
 CHOICE_APROPIACION = ((1, 'Excelente'), (2, 'Buena'), (3, 'Regular'), (4, 'Mala'))
 
@@ -66,4 +66,4 @@ class EventoColectivoAtencion(models.Model):
         return u'%s %s' % (self.actividad, self.fecha)
 
     class Meta:
-        verbose_name_plural = u'Eventos Colectivos de atencion integral'
+        verbose_name_plural = u'Eventos colectivos de atención integral'

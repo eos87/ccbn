@@ -3,7 +3,7 @@ from django.db import models
 from sistema.models import SubModulo
 #from promocion.models import CHOICE_APROPIACION, CHOICE_SENSIBILIZACION
 
-CHOICE_SENSIBILIZACION = ((1, 'Democracia'), (2, 'Participacion Ciudadana'), (3, 'Equidad de genero'),
+CHOICE_SENSIBILIZACION = ((1, 'Democracia'), (2, 'Participación Ciudadana'), (3, 'Equidad de género'),
                           (4, 'Medio ambiente'), (5, 'Derechos Humanos'), (6, 'Solidaridad'))
 CHOICE_APROPIACION = ((1, 'Excelente'), (2, 'Buena'), (3, 'Regular'), (4, 'Mala'))
 
@@ -13,7 +13,7 @@ CHOICE_HORARIO = ((1, u'Matutino'),
 
 class Frecuencia(models.Model):
     nombre = models.CharField(max_length=300)
-    cantidad = models.IntegerField(verbose_name = u'Cantidad de dias')
+    cantidad = models.IntegerField(verbose_name = u'Cantidad de días')
 
     def __unicode__(self):
         return u'%s' % self.nombre
@@ -28,7 +28,7 @@ class Curso(models.Model):
 
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
-    submodulo = models.ForeignKey(SubModulo, verbose_name = u'Area', limit_choices_to = {'parent_module__code': 'module1'})
+    submodulo = models.ForeignKey(SubModulo, verbose_name = u'Área', limit_choices_to = {'parent_module__code': 'module1'})
 
     def __unicode__(self):
         return u'%s - %s - %s - %s' % (self.nombre, self.fecha_inicio.strftime("%d/%m/%Y"), self.frecuencia, self.get_horario_display())
@@ -71,4 +71,4 @@ class EventoColectivoFormacion(models.Model):
         return u'%s %s' % (self.actividad, self.fecha)
 
     class Meta:
-        verbose_name_plural = u'Eventos Colectivos de formación'
+        verbose_name_plural = u'Eventos colectivos de formación'
