@@ -41,7 +41,7 @@ class Pintura(BasePromocion):
 CHOICE_ACTIVIDAD_COLECTIVA = ((1, u'Concierto de música'), (2, u'Coro'), (3, u'Exposición'),
                               (4, u'Obra de teatro'), (5, u'Multimedia'))
 
-CHOICE_SENSIBILIZACION = ((1, 'Democracia'), (2, 'Participacion Ciudadana'), (3, 'Equidad de genero'),
+CHOICE_SENSIBILIZACION = ((1, 'Democracia'), (2, 'Participacion Ciudadana'), (3, 'Equidad de género'),
                           (4, 'Medio ambiente'), (5, 'Derechos Humanos'), (6, 'Solidaridad'))
 CHOICE_APROPIACION = ((1, 'Excelente'), (2, 'Buena'), (3, 'Regular'), (4, 'Mala'))
 

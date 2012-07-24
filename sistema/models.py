@@ -10,14 +10,14 @@ class Modulo(models.Model):
         return u'%s' % self.nombre
 
     class Meta:
-        verbose_name_plural = u'Modulos'
+        verbose_name_plural = u'Módulos'
         permissions = (
             ("biblioteca", "Administrador Biblioteca"),
-            ("formacion", "Administrador Formacion"),
-            ('atencion_integral', "Administrador Atencion Integral"),
-            ('promocion_artistica', "Administrador Promocion Artistica"),
-            ('pv_interna', "Administrador Prevencion de Violencia Interna"),
-            ('pv_externa', "Administrador Prevencion de Violencia Externa"),
+            ("formacion", "Administrador Formación"),
+            ('atencion_integral', "Administrador Atención Integral"),
+            ('promocion_artistica', "Administrador Promoción Artística"),
+            ('pv_interna', "Administrador Prevención de Violencia Interna"),
+            ('pv_externa', "Administrador Prevención de Violencia Externa"),
         )
 
 # this list is based on the inlines with foo param in registro.admin module
