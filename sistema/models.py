@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from ccbn.utils import generate_years_choice, read_all_models
 
