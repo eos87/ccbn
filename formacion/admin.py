@@ -12,7 +12,7 @@ class InscripcionCursoInline(admin.TabularInline):
     extra = 0
     readonly_fields = ['persona', 'fecha']
     fields = ['persona', 'fecha', 'becado', 'estado', 'xq_no_termino', 'calificacion', 'mejora_autoestima', 'mejora_vida',
-                'calidad_contenido', 'metodologia', 'aporte_sociedad']
+                'calidad_contenido', 'metodologia', 'aporte_sociedad', 'continua_estudiando']
 
     class Media:
         css = {
@@ -22,7 +22,7 @@ class InscripcionCursoInline(admin.TabularInline):
 
 class CursoAdmin(admin.ModelAdmin):
     date_hierarchy = 'fecha_inicio'
-    fields = ['nombre', ('frecuencia', 'horario'), ('fecha_inicio', 'fecha_fin'), 'submodulo']
+    fields = ['nombre', ('frecuencia', 'horario'), ('fecha_inicio', 'fecha_fin'), 'submodulo', 'primaria_year']
     list_display = ['nombre', 'submodulo', 'frecuencia', 'horario', 'fecha_inicio', 'fecha_fin']
     inlines = [InscripcionCursoInline, ]
 

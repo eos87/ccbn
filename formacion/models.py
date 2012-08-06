@@ -31,7 +31,8 @@ class Curso(models.Model):
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     submodulo = models.ForeignKey(SubModulo, verbose_name = u'Área', limit_choices_to = {'parent_module__code': 'module1'})
-    primaria_year = models.IntegerField(choices=PRIMARIA_CHOICE, default=4)
+    primaria_year = models.IntegerField(choices=PRIMARIA_CHOICE, default=4,
+                                        verbose_name=u'Año de primaria', help_text=u'Aplica solo para educación básica (primaria)')
 
     def __unicode__(self):
         return u'%s - %s - %s - %s' % (self.nombre, self.fecha_inicio.strftime("%d/%m/%Y"), self.frecuencia, self.get_horario_display())

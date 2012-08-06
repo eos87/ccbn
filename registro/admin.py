@@ -159,12 +159,12 @@ class RegistroPinturaInline(BasePromocionInline):
 class PersonaAdmin(admin.ModelAdmin):
     list_filter = ['barrio','ciudad']
     search_fields = ['primer_nombre','segundo_nombre','primer_apellido','segundo_apellido']
-    list_display = ['__unicode__','fecha_nacimiento','sexo','municipio',
-                    'ciudad','barrio']
+    list_display = ['__unicode__','fecha_nacimiento','sexo','municipio', 'ciudad','barrio', 'personal_ccbn', 'docente_ccbn']
     add_form_template = 'admin/registro/add_form_template.html'
     fieldsets = [
         ('Datos personales', {'fields': [('primer_nombre', 'segundo_nombre'), ('primer_apellido', 'segundo_apellido'), 
                                         ('sexo', 'fecha_nacimiento'), ('codigo', 'cedula'), ('personal_ccbn', 'docente_ccbn')]}),
+        (u'Relación con CCBN', {'fields': [('docente', 'personal', 'alumno', 'visitante'), ('becado', 'promotor', 'beneficiario', 'integrante')]}),
         ('Ubicacion', {'fields': [('municipio', 'ciudad'), ('barrio'), 'direccion', ('telefono', 'celular')]}),
         (u'Información Académica', {'fields': [('nivel_academico', 'nivel_estudio'), 'centro_actual']}),
         ('Datos del Hogar', {'fields': ['oficio', 'con_quien_vive', 'tipo_familia',]}),

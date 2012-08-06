@@ -16,7 +16,7 @@ CHOICE_CATEGORIA = ((1, u'000 - Generalidades'), (2, u'100 - Filosofía y Psicol
 CHOICE_PROPOSITO = ((1, u'Investigación'), (2, u'Hábito de lectura'))
 
 class ActividadIndividual(models.Model):
-    persona = models.ForeignKey(Persona)
+    persona = models.ForeignKey(Persona, limit_choices_to = {'modulopersona__biblioteca__code': 'biblioteca'})
     fecha = models.DateTimeField()
     actividad = models.CharField(choices=CHOICE_ACTIVIDAD, max_length=100)
 
@@ -91,10 +91,12 @@ class Retorno(models.Model):
     class Meta:
         verbose_name_plural = u'Retornos'
 
+SERVICIO_CHOICE = ((1, 'Si'), (2, 'No'))
+
 class Servicio(models.Model):
     actividad = models.ForeignKey(ActividadIndividual)
-    capacidad_tecnica = models.IntegerField()
-    compromiso_social = models.IntegerField()
+    capacidad_tecnica = models.IntegerField(choices=SERVICIO_CHOICE)
+    compromiso_social = models.IntegerField(choices=SERVICIO_CHOICE)
 
     def __unicode__(self):
         return u'%s' % self.id

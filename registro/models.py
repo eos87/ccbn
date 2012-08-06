@@ -56,17 +56,11 @@ NIVEL_ESTUDIO_CHOICE = (
                         (26, u'Diplomados'),
                         )
 
-# NIVEL_ESTUDIO_CHOICE = ((1, u'Alfabetizandose'),
-#                         (2, u'Primaria'),
-#                         (3, u'Secundaria'),
-#                         (4, u'Universidad'),
-#                         (5, u'Técnico'),
-#                         (6, u'Postgrado'),
-#                         (7, u'Maestría'),
-#                         (8, u'Cursos'),
-#                         (9, u'Diplomados'),
-#                         (10, u'No estudia')
-#                         )
+TIPO_FAMILIA = ((1, u'Nuclear'),
+    (2, u'Mono parental jefe hombre'),
+    (3, u'Mono parental jefa mujer'),
+    (4, u'Extendida'),
+    (5, u'Ensamblada'))
 
 JEFE_FAMILIA_CHOICE = ((1, u'Padre'),
                        (2, u'Madre'),
@@ -120,31 +114,27 @@ class Persona(models.Model):
     personal_ccbn = models.IntegerField(choices=SI_NO_CHOICE)
     docente_ccbn = models.IntegerField(choices=SI_NO_CHOICE)
 
+    # relacion con ccbn
+    docente = models.BooleanField()
+    personal = models.BooleanField()
+    alumno = models.BooleanField()
+    visitante = models.BooleanField()
+    becado = models.BooleanField()
+    promotor = models.BooleanField()
+    beneficiario = models.BooleanField(verbose_name=u'Beneficiario de programa')
+    integrante = models.BooleanField(verbose_name=u'Integrante promoción artística')
     
     municipio = models.ForeignKey(Municipio)
     ciudad = ChainedForeignKey(
-        Ciudad, 
-        chained_field="municipio",
+        Ciudad, chained_field="municipio",
         chained_model_field="municipio", 
-        show_all=False, 
-        auto_choose=True
+        show_all=False, auto_choose=True
     )
     barrio = ChainedForeignKey(
-        Barrio, 
-        chained_field="ciudad",
+        Barrio, chained_field="ciudad", 
         chained_model_field="ciudad", 
-        show_all=False, 
-        auto_choose=True
+        show_all=False, auto_choose=True
     )
-    # barrio = models.ForeignKey(Barrio)
-    #distrito = models.IntegerField(choices=DISTRITO_CHOICE)
-    # distrito = ChainedForeignKey(
-    #     Distrito,
-    #     chained_field="barrio",
-    #     chained_model_field="barrio",
-    #     show_all=False,
-    #     auto_choose=True
-    # )
 
     direccion = models.CharField(max_length=200)
     telefono = models.CharField(max_length=12, help_text='Telefono convencional', blank=True, default='')
@@ -155,14 +145,8 @@ class Persona(models.Model):
     centro_actual = models.ForeignKey(Colegio, verbose_name = 'Centro de estudio actual', blank=True, null=True)
     oficio = models.ForeignKey(Oficio, blank=True, null=True)
 
-    con_quien_vive = models.ManyToManyField(Pariente)
-    tipo_familia = models.IntegerField(choices=(
-                        (1, u'Nuclear'),
-                        (2, u'Mono parental jefe hombre'),
-                        (3, u'Mono parental jefa mujer'),
-                        (4, u'Extendida'),
-                        (5, u'Ensamblada')
-                            )) # todo: definir con don Falguni los tipos de familia
+    con_quien_vive = models.ManyToManyField(Pariente, blank=True, null=True)
+    tipo_familia = models.IntegerField(choices=TIPO_FAMILIA, blank=True, null=True)
 
     jefe_familia = models.IntegerField(choices=JEFE_FAMILIA_CHOICE)
     j_primer_nombre = models.CharField(max_length=50, verbose_name = u'primer nombre')
@@ -236,17 +220,24 @@ class Relacion(models.Model):
 
 class ModuloPersona(models.Model):
     biblioteca = models.ManyToManyField(SubModulo, related_name='biblioteca', blank=True, null=True,
-                                         limit_choices_to = {'parent_module__code': 'module3'})
+                    limit_choices_to = {'parent_module__code': 'module3'})
+
     formacion = models.ManyToManyField(SubModulo, related_name='formacion', blank=True, null=True,
-                                       limit_choices_to = {'parent_module__code': 'module1'})
+                    limit_choices_to = {'parent_module__code': 'module1'})
+
     atencion_integral = models.ManyToManyField(SubModulo, related_name='atencion_integral', blank=True, null=True,
-                                                limit_choices_to = {'parent_module__code': 'module2'})
+                    limit_choices_to = {'parent_module__code': 'module2'})
+
     promocion_artistica = models.ManyToManyField(SubModulo, related_name='promocion_artistica', blank=True, null=True,
-                                                  limit_choices_to = {'parent_module__code': 'module4'})
-    pv_interna = models.ManyToManyField(SubModulo, related_name='pv_interna',  limit_choices_to = {'parent_module__code': 'module5'},
-                                        verbose_name = u'Prevención de Violencia Interna', blank=True, null=True,)
-    pv_externa = models.ManyToManyField(SubModulo, related_name='pv_externa',  limit_choices_to = {'parent_module__code': 'module6'},
-                                        verbose_name = u'Prevención de Violencia Externa', blank=True, null=True,)
+                    limit_choices_to = {'parent_module__code': 'module4'})
+
+    pv_interna = models.ManyToManyField(SubModulo, related_name='pv_interna',  
+                    limit_choices_to = {'parent_module__code': 'module5'},
+                    verbose_name = u'Prevención de Violencia Interna', blank=True, null=True,)
+
+    pv_externa = models.ManyToManyField(SubModulo, related_name='pv_externa',  
+                    limit_choices_to = {'parent_module__code': 'module6'},
+                    verbose_name = u'Prevención de Violencia Externa', blank=True, null=True,)
     persona = models.OneToOneField(Persona)
 
     def __unicode__(self):
@@ -271,6 +262,7 @@ CHOICE_MEJORA_VIDA = ((1, u'Muy útil'), (2, u'Útil'), (3, u'Poco útil'), (4, 
 CHOICE_CALIDAD = ((1, 'Excelente'), (2, 'Bueno'), (3, 'Regular'), (4, 'Malo'))
 CHOICE_METODOLOGIA = CHOICE_CALIDAD
 CHOICE_APORTE = ((1, u'Muy útil'), (2, u'Útil'), (3, u'Poco útil'), (4, u'Nada útil'))
+CHOICE_CONTINUA_EST = ((1, 'Si'), (2, 'No'), (3, 'No aplica'))
 
 class InscripcionCurso(models.Model):
     persona = models.ForeignKey(Persona)
@@ -288,6 +280,8 @@ class InscripcionCurso(models.Model):
     mejora_vida = models.IntegerField(blank=True, null=True, choices=CHOICE_MEJORA_VIDA)
     calidad_contenido = models.IntegerField(blank=True, null=True, choices=CHOICE_CALIDAD)
     metodologia = models.IntegerField(blank=True, null=True, choices=CHOICE_METODOLOGIA)
+    continua_estudiando = models.IntegerField(choices=CHOICE_CONTINUA_EST, blank=True, null=True, 
+                                help_text=u'En curso vocacional o secundaria. Aplica para educación primaria finalizada')
 
     # solo para uso del sistema
     date_time = models.DateTimeField(auto_now_add=True)
