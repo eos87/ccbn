@@ -56,9 +56,6 @@ class EvaluacionCurso(models.Model):
     class Meta:
         verbose_name = u'Evaluación de curso'
         verbose_name_plural = u'Evaluación de cursos'
-        permissions = (
-            ("puede_evaluar", "Puede Evaluar Cursos"),
-        )
 
 class ActividadEventoFormacion(models.Model):
     nombre = models.CharField(max_length=200)

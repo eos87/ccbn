@@ -20,6 +20,7 @@ class InscripcionCursoInline(admin.TabularInline):
         }
 
 class EvaluacionCursoInline(admin.TabularInline):
+    verbose_name_plural = u'Evaluación del curso'
     model = EvaluacionCurso
 
 class CursoAdmin(admin.ModelAdmin):
@@ -27,8 +28,6 @@ class CursoAdmin(admin.ModelAdmin):
     fields = ['nombre', ('frecuencia', 'horario'), ('fecha_inicio', 'fecha_fin'), 'submodulo', 'primaria_year']
     list_display = ['nombre', 'submodulo', 'frecuencia', 'horario', 'fecha_inicio', 'fecha_fin']
     inlines = [InscripcionCursoInline, EvaluacionCursoInline]
-
-    # def change_view()
 
 class EventoColectivaFormacionAdmin(admin.ModelAdmin):
     fieldsets = [
