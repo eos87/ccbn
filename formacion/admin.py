@@ -19,12 +19,16 @@ class InscripcionCursoInline(admin.TabularInline):
             'screen': ('/files/css/admin.css', ),
         }
 
+class EvaluacionCursoInline(admin.TabularInline):
+    model = EvaluacionCurso
 
 class CursoAdmin(admin.ModelAdmin):
     date_hierarchy = 'fecha_inicio'
     fields = ['nombre', ('frecuencia', 'horario'), ('fecha_inicio', 'fecha_fin'), 'submodulo', 'primaria_year']
     list_display = ['nombre', 'submodulo', 'frecuencia', 'horario', 'fecha_inicio', 'fecha_fin']
-    inlines = [InscripcionCursoInline, ]
+    inlines = [InscripcionCursoInline, EvaluacionCursoInline]
+
+    # def change_view()
 
 class EventoColectivaFormacionAdmin(admin.ModelAdmin):
     fieldsets = [

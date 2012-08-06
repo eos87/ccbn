@@ -40,6 +40,26 @@ class Curso(models.Model):
     class Meta:
         verbose_name_plural = u'Cursos'
 
+CHOICE_EVAL = ((1, 'Excelente'), (2, 'Buena'), (3, 'Regular'), (4, 'Mala'))
+CHOICE_EVAL_GENERO = ((1, 'Avanzado'), (2, 'Iniciado'), (3, 'No iniciado'))
+
+class EvaluacionCurso(models.Model):
+    curso = models.OneToOneField(Curso)
+    calidad_contenido = models.IntegerField(choices=CHOICE_EVAL)
+    metodologia = models.IntegerField(choices=CHOICE_EVAL)
+    calificacion_docente = models.IntegerField(choices=CHOICE_EVAL)
+    genero = models.IntegerField(choices=CHOICE_EVAL_GENERO)
+
+    def __unicode__(self):
+        return u'Evaluación curso %s' % self.curso.nombre
+
+    class Meta:
+        verbose_name = u'Evaluación de curso'
+        verbose_name_plural = u'Evaluación de cursos'
+        permissions = (
+            ("puede_evaluar", "Puede Evaluar Cursos"),
+        )
+
 class ActividadEventoFormacion(models.Model):
     nombre = models.CharField(max_length=200)
 
