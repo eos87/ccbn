@@ -163,7 +163,7 @@ class PersonaAdmin(admin.ModelAdmin):
     add_form_template = 'admin/registro/add_form_template.html'
     fieldsets = [
         ('Datos personales', {'fields': [('primer_nombre', 'segundo_nombre'), ('primer_apellido', 'segundo_apellido'), 
-                                        ('sexo', 'fecha_nacimiento'), ('codigo', 'cedula'), ('personal_ccbn', 'docente_ccbn')]}),
+                                        ('sexo', 'fecha_nacimiento'), ('codigo', 'cedula')]}),
         (u'Relación con CCBN', {'fields': [('docente', 'personal', 'alumno', 'visitante'), ('becado', 'promotor', 'beneficiario', 'integrante')]}),
         ('Ubicacion', {'fields': [('municipio', 'ciudad'), ('barrio'), 'direccion', ('telefono', 'celular')]}),
         (u'Información Académica', {'fields': [('nivel_academico', 'nivel_estudio'), 'centro_actual']}),
