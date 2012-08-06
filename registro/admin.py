@@ -2,6 +2,7 @@
 from django.contrib import admin
 from django import forms
 from django.forms import CheckboxSelectMultiple
+from prevencion.models import InscripcionPrevencionInterna
 from models import *
 
 class RelacionInline(admin.TabularInline):
@@ -156,6 +157,13 @@ class RegistroPinturaInline(BasePromocionInline):
     model = RegistroPintura
     verbose_name_plural = u'Registro grupo de pintura'
 
+# Programa VBG Interna
+class InscripcionPVBGInternaInline(admin.TabularInline):
+    model = InscripcionPrevencionInterna
+    extra = 1
+    exclude = ('asistencia', 'razon_no_asistir', 'calificacion', 'mejora_autoestima', 
+               'nivel_conocimiento', 'calidad_contenido', 'metodologia', 'empoderamiento')
+
 class PersonaAdmin(admin.ModelAdmin):
     list_filter = ['barrio','ciudad']
     search_fields = ['primer_nombre','segundo_nombre','primer_apellido','segundo_apellido']
@@ -204,6 +212,9 @@ class PersonaAdmin(admin.ModelAdmin):
                 inlines.append(obj.inline)
             # agregando inlines del modulo de promocion artistica
             for obj in modulos.promocion_artistica.all().exclude(inline__exact=''):
+                inlines.append(obj.inline)
+            # agregando inlines del modulo de prevencion interna
+            for obj in modulos.pv_interna.all().exclude(inline__exact=''):
                 inlines.append(obj.inline)
 
             self.inlines += [eval(inline) for inline in inlines]

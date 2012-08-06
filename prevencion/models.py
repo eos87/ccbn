@@ -3,6 +3,7 @@ from django.db import models
 from registro.models import (CHOICE_CALIDAD, CHOICE_ESTADO_CURSO, CHOICE_CALIFICACION, 
                              Persona)
 from ccbn.utils import generate_years_choice
+import datetime
 
 CHOICE_ACTIVIDADES_INTERNAS = (
                                (1, 'Taller para CCBN'), 
@@ -91,39 +92,46 @@ class EventoExterno(models.Model):
         verbose_name_plural = u'Eventos Externos'
 
 CHOICE_SEMESTRE = ((1, '1er Semestre'), (2, '2do Semestre'))
+CHOICE_ACTOR_CCBN = ((1, 'Personal CCBN'), (2, 'Docentes CCBN'), (3, 'Promotores/as'))
 
-# class PrevencionInterna(models.Model):
-#     year = models.IntegerField('Año', choices=generate_years_choice(2012))
-#     semestre = models.IntegerField(choices=CHOICE_SEMESTRE)
+class PrevencionInterna(models.Model):
+    year = models.IntegerField('Año', choices=generate_years_choice(2012))
+    semestre = models.IntegerField(choices=CHOICE_SEMESTRE)
+    relacion_ccbn = models.IntegerField(choices=CHOICE_ACTOR_CCBN)
 
-#     def __unicode__(self):
-#         return u'PVBG interno %s %s' % (self.get_semestre_display(), self.year)
+    def __unicode__(self):
+        return u'%s %s %s' % (
+                self.get_relacion_ccbn_display(),
+                self.get_semestre_display(), 
+                self.year
+        )
 
-#     class Meta:
-#         verbose_name = u'Prevención Interna'
-#         verbose_name_plural = u'Prevención Interna'
+    class Meta:
+        verbose_name = u'Prevención Interna'
+        verbose_name_plural = u'Prevención Interna'
 
-# CHOICE_NO_ASISTIR = ((1, 'Social'), (2, u'Económico'), (3, u'Conducta'), (4, u'Falta de interés'))
-# CHOICE_AUTOEST = ((1, 'No iniciado'), (2, u'Iniciado'), (3, u'Avanzado'), (4, 'Logrado'))
+CHOICE_NO_ASISTIR = ((1, 'Social'), (2, u'Económico'), (3, u'Conducta'), (4, u'Falta de interés'))
+CHOICE_AUTOEST = ((1, 'No iniciado'), (2, u'Iniciado'), (3, u'Avanzado'), (4, 'Logrado'))
 
-# class InscripcionPrevencionInterna(models.Model):
-#     persona = models.ForeignKey(Persona)
-#     pvbg_interna = models.ForeignKey(PrevencionInterna)
+class InscripcionPrevencionInterna(models.Model):
+    persona = models.ForeignKey(Persona)
+    pvbg_interna = models.ForeignKey(PrevencionInterna)
+    fecha = models.DateField(verbose_name = u'Fecha de inscripcion', default=datetime.date.today())
 
-#     asistencia = models.IntegerField(choices=CHOICE_ESTADO_CURSO, blank=True, null=True,
-#             verbose_name=u'Asistencia en Talleres PVBG')
-#     razon_no_asistir = models.IntegerField(choices=CHOICE_NO_ASISTIR, blank=True, null=True)
-#     calificacion = models.IntegerField(choices=CHOICE_CALIFICACION, blank=True, null=True)
-#     mejora_autoestima = models.IntegerField(choices=CHOICE_AUTOEST, blank=True, null=True)
-#     nivel_conocimiento = models.IntegerField(choices=CHOICE_AUTOEST, blank=True, null=True, 
-#             help_text=u'Nivel de conocimiento de prevención de VBG')
-#     calidad_contenido = models.IntegerField(choices=CHOICE_CALIDAD, blank=True, null=True)
-#     metodologia = models.IntegerField(choices=CHOICE_CALIDAD, blank=True, null=True)
-#     empoderamiento = models.IntegerField(choices=CHOICE_CALIDAD, blank=True, null=True,
-#             verbose_name=u'Empoderamiento y acción comunitaria')
+    asistencia = models.IntegerField(choices=CHOICE_ESTADO_CURSO, blank=True, null=True,
+            verbose_name=u'Asistencia en Talleres PVBG')
+    razon_no_asistir = models.IntegerField(choices=CHOICE_NO_ASISTIR, blank=True, null=True)
+    calificacion = models.IntegerField(choices=CHOICE_CALIFICACION, blank=True, null=True)
+    mejora_autoestima = models.IntegerField(choices=CHOICE_AUTOEST, blank=True, null=True)
+    nivel_conocimiento = models.IntegerField(choices=CHOICE_AUTOEST, blank=True, null=True, 
+            help_text=u'Nivel de conocimiento de prevención de VBG')
+    calidad_contenido = models.IntegerField(choices=CHOICE_CALIDAD, blank=True, null=True)
+    metodologia = models.IntegerField(choices=CHOICE_CALIDAD, blank=True, null=True)
+    empoderamiento = models.IntegerField(choices=CHOICE_CALIDAD, blank=True, null=True,
+            verbose_name=u'Empoderamiento y acción comunitaria')
 
-#     def __unicode__(self):
-#         return u'%s' % self.id
+    def __unicode__(self):
+        return u'%s' % self.id
 
-#     class Meta:
-#         verbose_name_plural = u'Inscripciones Prevencion Interna'
+    class Meta:
+        verbose_name_plural = u'Inscripciones Prevencion Interna'

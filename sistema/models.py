@@ -24,7 +24,8 @@ class Modulo(models.Model):
 # this list is based on the inlines with foo param in registro.admin module
 INLINES = ('RegistroBibliotecaInline', 'FormacionBasicaInline', 'FormacionVocacionalInline', 'FormacionArtisticaInline',
            'RegistroBecaPrimariaInline', 'RegistroBecaSecundariaInline', 'RegistroBecaUniversitariaInline',
-           'RegistroMusicaInline', 'RegistroTeatroInline', 'RegistroDanzaInline', 'RegistroCoroInline', 'RegistroPinturaInline')
+           'RegistroMusicaInline', 'RegistroTeatroInline', 'RegistroDanzaInline', 'RegistroCoroInline', 
+           'RegistroPinturaInline', 'InscripcionPVBGInternaInline')
 
 class SubModulo(models.Model):
     '''Modelo para definir las subsecciones donde va a estar asignada la persona'''
