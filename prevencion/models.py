@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from registro.models import CHOICE_CALIDAD, Persona
+from registro.models import (CHOICE_CALIDAD, CHOICE_ESTADO_CURSO, CHOICE_CALIFICACION, 
+                             Persona)
+from ccbn.utils import generate_years_choice
 
 CHOICE_ACTIVIDADES_INTERNAS = (
                                (1, 'Taller para CCBN'), 
@@ -18,9 +20,6 @@ CHOICE_ACTIVIDADES_INTERNAS = (
                                (13, 'Autocuido'),
                                (14, 'Autoayuda'),
                                )
-# CHOICE_ACTIVIDADES_EXTERNAS = ((1, 'Feria'), (2, 'Charla'), 
-#                                (3, 'Reflexión'), (4, 'Lúdica'), 
-#                                (5, 'Teatro'))
 
 CHOICE_TEMATICA = ((1, u'Derecho Niñez'), 
                    (2, u'Discriminación'), 
@@ -90,3 +89,41 @@ class EventoExterno(models.Model):
 
     class Meta:
         verbose_name_plural = u'Eventos Externos'
+
+CHOICE_SEMESTRE = ((1, '1er Semestre'), (2, '2do Semestre'))
+
+# class PrevencionInterna(models.Model):
+#     year = models.IntegerField('Año', choices=generate_years_choice(2012))
+#     semestre = models.IntegerField(choices=CHOICE_SEMESTRE)
+
+#     def __unicode__(self):
+#         return u'PVBG interno %s %s' % (self.get_semestre_display(), self.year)
+
+#     class Meta:
+#         verbose_name = u'Prevención Interna'
+#         verbose_name_plural = u'Prevención Interna'
+
+# CHOICE_NO_ASISTIR = ((1, 'Social'), (2, u'Económico'), (3, u'Conducta'), (4, u'Falta de interés'))
+# CHOICE_AUTOEST = ((1, 'No iniciado'), (2, u'Iniciado'), (3, u'Avanzado'), (4, 'Logrado'))
+
+# class InscripcionPrevencionInterna(models.Model):
+#     persona = models.ForeignKey(Persona)
+#     pvbg_interna = models.ForeignKey(PrevencionInterna)
+
+#     asistencia = models.IntegerField(choices=CHOICE_ESTADO_CURSO, blank=True, null=True,
+#             verbose_name=u'Asistencia en Talleres PVBG')
+#     razon_no_asistir = models.IntegerField(choices=CHOICE_NO_ASISTIR, blank=True, null=True)
+#     calificacion = models.IntegerField(choices=CHOICE_CALIFICACION, blank=True, null=True)
+#     mejora_autoestima = models.IntegerField(choices=CHOICE_AUTOEST, blank=True, null=True)
+#     nivel_conocimiento = models.IntegerField(choices=CHOICE_AUTOEST, blank=True, null=True, 
+#             help_text=u'Nivel de conocimiento de prevención de VBG')
+#     calidad_contenido = models.IntegerField(choices=CHOICE_CALIDAD, blank=True, null=True)
+#     metodologia = models.IntegerField(choices=CHOICE_CALIDAD, blank=True, null=True)
+#     empoderamiento = models.IntegerField(choices=CHOICE_CALIDAD, blank=True, null=True,
+#             verbose_name=u'Empoderamiento y acción comunitaria')
+
+#     def __unicode__(self):
+#         return u'%s' % self.id
+
+#     class Meta:
+#         verbose_name_plural = u'Inscripciones Prevencion Interna'

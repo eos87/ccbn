@@ -173,7 +173,8 @@ class PersonaAdmin(admin.ModelAdmin):
                                                                                      
     ]
 
-    inlines = [RelacionInline, ModuloPersonaInline, FormacionBasicaInline, FormacionVocacionalInline, FormacionArtisticaInline]
+    inlines = [RelacionInline, ModuloPersonaInline, FormacionBasicaInline, 
+            FormacionVocacionalInline, FormacionArtisticaInline]
 
     formfield_overrides = {
         models.ManyToManyField: {'widget': CheckboxSelectMultiple},

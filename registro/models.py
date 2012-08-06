@@ -110,10 +110,7 @@ class Persona(models.Model):
     sexo = models.IntegerField(choices=((1, 'Masculino'), (2, 'Femenino')))
     fecha_nacimiento = models.DateField()
     cedula = models.CharField(max_length=20, blank=True, default='')
-
-    # personal_ccbn = models.IntegerField(choices=SI_NO_CHOICE)
-    # docente_ccbn = models.IntegerField(choices=SI_NO_CHOICE)
-
+    
     # relacion con ccbn
     docente = models.BooleanField()
     personal = models.BooleanField()

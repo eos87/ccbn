@@ -27,6 +27,8 @@ class CursoAdmin(admin.ModelAdmin):
     date_hierarchy = 'fecha_inicio'
     fields = ['nombre', ('frecuencia', 'horario'), ('fecha_inicio', 'fecha_fin'), 'submodulo', 'primaria_year']
     list_display = ['nombre', 'submodulo', 'frecuencia', 'horario', 'fecha_inicio', 'fecha_fin']
+    search_fields = ['nombre']
+    list_filter = ['submodulo__parent_module', 'frecuencia', 'horario']
     inlines = [InscripcionCursoInline, EvaluacionCursoInline]
 
 class EventoColectivaFormacionAdmin(admin.ModelAdmin):
