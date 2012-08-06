@@ -21,6 +21,8 @@ class Frecuencia(models.Model):
     class Meta:
         verbose_name_plural = u'Frecuencias'
 
+PRIMARIA_CHOICE = ((1, u'1er Año'), (2, u'2do Año'), (3, u'3er Año'), (4, 'No aplica'))
+
 class Curso(models.Model):
     nombre = models.CharField(max_length=200)
     frecuencia = models.ForeignKey(Frecuencia)
@@ -29,6 +31,7 @@ class Curso(models.Model):
     fecha_inicio = models.DateField()
     fecha_fin = models.DateField()
     submodulo = models.ForeignKey(SubModulo, verbose_name = u'Área', limit_choices_to = {'parent_module__code': 'module1'})
+    primaria_year = models.IntegerField(choices=PRIMARIA_CHOICE, default=4)
 
     def __unicode__(self):
         return u'%s - %s - %s - %s' % (self.nombre, self.fecha_inicio.strftime("%d/%m/%Y"), self.frecuencia, self.get_horario_display())
