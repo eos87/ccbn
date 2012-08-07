@@ -146,9 +146,10 @@ class Persona(models.Model):
     tipo_familia = models.IntegerField(choices=TIPO_FAMILIA, blank=True, null=True)
 
     jefe_familia = models.IntegerField(choices=JEFE_FAMILIA_CHOICE)
-    j_primer_nombre = models.CharField(max_length=50, verbose_name = u'primer nombre')
+    j_primer_nombre = models.CharField(max_length=50, verbose_name = u'primer nombre',
+                                       blank=True, default='')
     j_segundo_nombre = models.CharField(max_length=50, blank=True, default='', verbose_name = u'segundo nombre')
-    j_primer_apellido = models.CharField(max_length=50, verbose_name = u'primer apellido')
+    j_primer_apellido = models.CharField(max_length=50, verbose_name = u'primer apellido', blank=True, default='')
     j_segundo_apellido = models.CharField(max_length=50, blank=True, default='', verbose_name = u'segundo apellido')
     j_oficio = models.ForeignKey(Oficio, related_name='oficio_jefe', blank=True, verbose_name = u'oficio', null=True)
 
