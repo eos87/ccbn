@@ -145,7 +145,7 @@ class Persona(models.Model):
     con_quien_vive = models.ManyToManyField(Pariente, blank=True, null=True)
     tipo_familia = models.IntegerField(choices=TIPO_FAMILIA, blank=True, null=True)
 
-    jefe_familia = models.IntegerField(choices=JEFE_FAMILIA_CHOICE)
+    jefe_familia = models.IntegerField(choices=JEFE_FAMILIA_CHOICE, blank=True, null=True)
     j_primer_nombre = models.CharField(max_length=50, verbose_name = u'primer nombre',
                                        blank=True, default='')
     j_segundo_nombre = models.CharField(max_length=50, blank=True, default='', verbose_name = u'segundo nombre')
