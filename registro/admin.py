@@ -2,7 +2,7 @@
 from django.contrib import admin
 from django import forms
 from django.forms import CheckboxSelectMultiple
-from prevencion.models import InscripcionPrevencionInterna
+from prevencion.models import InscripcionPrevencionInterna, InscripcionPrevencionExterna
 from models import *
 
 class RelacionInline(admin.TabularInline):
@@ -132,6 +132,12 @@ class RegistroBecaUniversitariaInline(admin.TabularInline):
                'solidario_centro','solidario_comunidad', 'solidario_sociedad')
     verbose_name_plural = u'Registro Beca Universitaria'
 
+class RegistroFamiliaBecadoInline(admin.TabularInline):
+    model = RegistroFamiliaBecado
+    extra = 1
+    fields = ('persona', 'fecha', 'beca')
+    verbose_name_plural = u'Familia de Becado'
+
 # Inlines de registro en grupos musicales
 class BasePromocionInline(admin.TabularInline):
     fields = ['fecha', 'grupo']
@@ -163,6 +169,11 @@ class InscripcionPVBGInternaInline(admin.TabularInline):
     extra = 1
     exclude = ('asistencia', 'razon_no_asistir', 'calificacion', 'mejora_autoestima', 
                'nivel_conocimiento', 'calidad_contenido', 'metodologia', 'empoderamiento')
+
+class InscripcionPVBGExternaInline(admin.TabularInline):
+    model = InscripcionPrevencionExterna
+    extra = 1
+    fields = ('fecha', 'persona', 'pvbg_externa')
 
 class PersonaAdmin(admin.ModelAdmin):
     list_filter = ['barrio','ciudad']
@@ -215,6 +226,9 @@ class PersonaAdmin(admin.ModelAdmin):
                 inlines.append(obj.inline)
             # agregando inlines del modulo de prevencion interna
             for obj in modulos.pv_interna.all().exclude(inline__exact=''):
+                inlines.append(obj.inline)
+            # agregando inlines del modulo de prevencion externa
+            for obj in modulos.pv_externa.all().exclude(inline__exact=''):
                 inlines.append(obj.inline)
 
             self.inlines += [eval(inline) for inline in inlines]

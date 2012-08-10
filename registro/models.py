@@ -157,6 +157,9 @@ class Persona(models.Model):
         return u'%s - %s %s %s %s' % (self.codigo, self.primer_nombre, self.segundo_nombre, 
                                  self.primer_apellido, self.segundo_apellido)
 
+    def get_full_name(self):
+        return u'%s %s' % (self.primer_nombre, self.primer_apellido)
+
     def save(self, *args, **kwargs):
         if not self.id:
             self.codigo = Persona.objects.all().count() + 1
@@ -301,6 +304,8 @@ class RegistroBiblioteca(models.Model):
     class Meta:
         verbose_name_plural = u'Registros Biblioteca'
 
+from atencionintegral.models import *
+
 class BaseRegistroAnual(models.Model):
     persona = models.ForeignKey(Persona)
     fecha = models.DateField(default=datetime.date.today(), verbose_name = u'Fecha de registro')    
@@ -310,8 +315,6 @@ class BaseRegistroAnual(models.Model):
 
     class Meta:
         abstract = True
-
-from atencionintegral.models import *
 
 # Modelos de registro de becas, esto es año con año.
 class RegistroBecaPrimaria(BaseRegistroAnual):
@@ -355,6 +358,19 @@ class RegistroBecaUniversitaria(BaseRegistroAnual):
     class Meta:
         verbose_name_plural = u'Registro Beca Universitaria'
 
+class RegistroFamiliaBecado(BaseRegistroAnual):
+    beca = models.ForeignKey(FamiliaBecado, verbose_name = u'Familia becado')
+    formacion_acompa = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    mejora_relacion = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    sens_derecho_edu = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    part_soya = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    madre_en_curso = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    padre_en_curso = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    hermano_en_curso = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+
+    class Meta:
+        verbose_name_plural = u'Registro Familia Becados'
+
 CHOICE_VALORES_CCBN = ((1, 'Avanzado'), (2, 'Iniciado'), (3, 'No Iniciado'))
 
 class BaseRegistroPromocion(BaseRegistroAnual):
@@ -397,3 +413,4 @@ class RegistroPintura(BaseRegistroPromocion):
     grupo = models.ForeignKey(Pintura)
     class Meta:
         verbose_name_plural = u'Registro Grupo de Pintura'
+

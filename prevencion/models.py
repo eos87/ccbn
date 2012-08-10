@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from registro.models import (CHOICE_CALIDAD, CHOICE_ESTADO_CURSO, CHOICE_CALIFICACION, 
-                             Persona)
+                             SI_NO_CHOICE, Persona)
 from ccbn.utils import generate_years_choice
 import datetime
 
@@ -135,3 +135,35 @@ class InscripcionPrevencionInterna(models.Model):
 
     class Meta:
         verbose_name_plural = u'Inscripciones Prevencion Interna'
+
+class PrevencionExterna(models.Model):
+    year = models.IntegerField('Año', choices=generate_years_choice(2012))
+    semestre = models.IntegerField(choices=CHOICE_SEMESTRE)
+
+    def __unicode__(self):
+        return u'Prev Externa %s %s' % (
+                self.get_semestre_display(),
+                self.year
+            )
+
+    class Meta:
+        verbose_name = u'Prevención Externa'
+        verbose_name_plural = verbose_name
+
+class InscripcionPrevencionExterna(models.Model):
+    persona = models.ForeignKey(Persona)
+    pvbg_externa = models.ForeignKey(PrevencionExterna)
+    fecha = models.DateField(verbose_name = u'Fecha de inscripcion', default=datetime.date.today())
+
+    proceso_formacion = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    vulnerabilidad = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    comp = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    autonomia = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    accion_comunitaria = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    respeto = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+
+    def __unicode__(self):
+        return u'%s' % self.id
+
+    class Meta:
+        verbose_name_plural = u'Inscripciones Prevencion Externa'

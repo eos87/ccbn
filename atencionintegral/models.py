@@ -67,3 +67,12 @@ class EventoColectivoAtencion(models.Model):
 
     class Meta:
         verbose_name_plural = u'Eventos colectivos de atención integral'
+
+class FamiliaBecado(BaseBeca):
+    def __unicode__(self):
+        return u'Familia de becados %s' % self.year
+
+    class Meta:
+        verbose_name = u'Familia de becado'
+        verbose_name_plural = u'Familia de Becados'
+

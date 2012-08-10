@@ -45,3 +45,21 @@ class PrevencionInternaAdmin(admin.ModelAdmin):
     inlines = [PrevInternaInline, ]
 
 admin.site.register(PrevencionInterna, PrevencionInternaAdmin)
+
+class PrevExternaInline(admin.TabularInline):
+    model = InscripcionPrevencionExterna
+    max_num = 0
+    extra = 0
+    readonly_fields = ['persona', 'fecha']
+    fields = ['persona', 'fecha', 'proceso_formacion', 'vulnerabilidad', 'comp', 'autonomia', 
+               'accion_comunitaria', 'respeto']
+
+    class Media:
+        css = {
+            'screen': ('/files/css/admin.css', ),
+        }
+
+class PrevencionExternaAdmin(admin.ModelAdmin):
+    inlines = [PrevExternaInline, ]
+
+admin.site.register(PrevencionExterna, PrevencionExternaAdmin)

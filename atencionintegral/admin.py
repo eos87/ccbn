@@ -1,6 +1,6 @@
 from django.contrib import admin
 from registro.models import (RegistroBecaPrimaria, RegistroBecaSecundaria, 
-                             RegistroBecaUniversitaria)
+                             RegistroBecaUniversitaria, RegistroFamiliaBecado)
 from models import *
 
 class BecadosPrimariaInline(admin.TabularInline):
@@ -45,6 +45,26 @@ class BecadosUniversitariosInline(BecadosSecundariaInline):
 class BecaUniversitariaAdmin(admin.ModelAdmin):
     inlines = [BecadosUniversitariosInline, ]
 
+admin.site.register(BecaUniversitaria, BecaUniversitariaAdmin)
+
+class FamiliaBecadoInline(admin.TabularInline):
+    fields = ('persona', 'fecha', 'formacion_acompa', 'mejora_relacion', 'sens_derecho_edu', 'part_soya', 
+               'madre_en_curso','padre_en_curso', 'hermano_en_curso')
+    readonly_fields = ['persona', 'fecha']
+    extra = 0
+    max_num = 0
+    model = RegistroFamiliaBecado
+
+    class Media:
+        css = {
+            'screen': ('/files/css/admin.css', ),
+        }
+
+class FamiliaBecadoAdmin(admin.ModelAdmin):
+    inlines = [FamiliaBecadoInline, ]
+
+admin.site.register(FamiliaBecado, FamiliaBecadoAdmin)
+
 class EventoColectivaAtencionAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['titulo','lugar',('fecha', 'actividad'),]}),
@@ -55,6 +75,5 @@ class EventoColectivaAtencionAdmin(admin.ModelAdmin):
         js = ['js/tiny_mce/tiny_mce.js',
               'js/basic_config.js',]
 
-admin.site.register(BecaUniversitaria, BecaUniversitariaAdmin)
 admin.site.register(EventoColectivoAtencion, EventoColectivaAtencionAdmin)
 admin.site.register(ActividadEventoAtencion)
