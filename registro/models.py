@@ -400,30 +400,3 @@ class InscripcionGrupo(BaseRegistroPromocion):
 
     class Meta:
         verbose_name_plural = u'Inscripciones en Grupos'
-
-# Modelos de registro en promocion artistica
-class RegistroMusica(BaseRegistroPromocion):
-    grupo = models.ForeignKey(Musica)
-    class Meta:
-        verbose_name_plural = u'Registro Grupo de Musica'
-
-class RegistroTeatro(BaseRegistroPromocion):
-    grupo = models.ForeignKey(Teatro)
-    class Meta:
-        verbose_name_plural = u'Registro Grupo de Musica'
-
-class RegistroDanza(BaseRegistroPromocion):
-    grupo = models.ForeignKey(Danza)
-    class Meta:
-        verbose_name_plural = u'Registro Grupo de Danza'
-
-class RegistroCoro(BaseRegistroPromocion):
-    grupo = models.ForeignKey(Coro)
-    class Meta:
-        verbose_name_plural = u'Registro Grupo de Coro'
-
-class RegistroPintura(BaseRegistroPromocion):
-    grupo = models.ForeignKey(Pintura)
-    class Meta:
-        verbose_name_plural = u'Registro Grupo de Pintura'
-
