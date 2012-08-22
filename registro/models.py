@@ -389,6 +389,18 @@ class BaseRegistroPromocion(BaseRegistroAnual):
     class Meta:
         abstract = True
 
+# Creando el modelo para inscripcion en grupo. Esta es una modificacion
+# para unificar los indicadores de Grupos de Promocion y obtener mas 
+# facil y limpiamente los indicadores
+class InscripcionGrupo(BaseRegistroPromocion):
+    grupo = models.ForeignKey(Grupo)
+    
+    # solo para uso del sistema
+    date_time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = u'Inscripciones en Grupos'
+
 # Modelos de registro en promocion artistica
 class RegistroMusica(BaseRegistroPromocion):
     grupo = models.ForeignKey(Musica)

@@ -35,7 +35,10 @@ class Curso(models.Model):
                                         verbose_name=u'Año de primaria', help_text=u'Aplica solo para educación básica (primaria)')
 
     def __unicode__(self):
-        return u'%s - %s - %s - %s' % (self.nombre, self.fecha_inicio.strftime("%d/%m/%Y"), self.frecuencia, self.get_horario_display())
+        return u'%s - %s - %s - %s' % (
+            self.nombre, self.fecha_inicio.strftime("%d/%m/%Y"), 
+            self.frecuencia, self.get_horario_display()
+        )
 
     class Meta:
         verbose_name_plural = u'Cursos'

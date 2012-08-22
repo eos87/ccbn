@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from models import *
 from django.contrib import admin
 from registro.models import *
+from models import *
 
 class BasePromoArtisticaInline(admin.TabularInline):
     fields = ['persona', 'fecha', 'asistencia', 'razon_no_continuar', 'calificacion',
@@ -17,40 +17,12 @@ class BasePromoArtisticaInline(admin.TabularInline):
             'screen': ('/files/css/admin.css',),
         }
 
-class MusicaInline(BasePromoArtisticaInline):
-    model = RegistroMusica
+class InscripcionGrupoInline(BasePromoArtisticaInline):
+    model = InscripcionGrupo
 
-class MusicaAdmin(admin.ModelAdmin):
-    inlines = [MusicaInline, ]
-admin.site.register(Musica, MusicaAdmin)
-
-class TeatroInline(BasePromoArtisticaInline):
-    model = RegistroTeatro
-
-class TeatroAdmin(admin.ModelAdmin):
-    inlines = [TeatroInline, ]
-admin.site.register(Teatro, TeatroAdmin)
-
-class CoroInline(BasePromoArtisticaInline):
-    model = RegistroCoro
-
-class CoroAdmin(admin.ModelAdmin):
-    inlines = [CoroInline, ]
-admin.site.register(Coro, CoroAdmin)
-
-class DanzaInline(BasePromoArtisticaInline):
-    model = RegistroDanza
-
-class DanzaAdmin(admin.ModelAdmin):
-    inlines = [DanzaInline, ]
-admin.site.register(Danza, DanzaAdmin)
-
-class PinturaInline(BasePromoArtisticaInline):
-    model = RegistroPintura
-
-class PinturaAdmin(admin.ModelAdmin):
-    inlines = [PinturaInline, ]
-admin.site.register(Pintura, PinturaAdmin)
+class GrupoAdmin(admin.ModelAdmin):
+    inlines = [InscripcionGrupoInline]
+admin.site.register(Grupo, GrupoAdmin)
 
 # Eventos Colectivos
 class EventoColectivoAdmin(admin.ModelAdmin):

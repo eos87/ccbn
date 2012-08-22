@@ -141,27 +141,51 @@ class RegistroFamiliaBecadoInline(admin.TabularInline):
 # Inlines de registro en grupos musicales
 class BasePromocionInline(admin.TabularInline):
     fields = ['fecha', 'grupo']
+    model = InscripcionGrupo
     extra = 1
+    # key_code = submodulo code ejm: grupomusica, grupoteatro
+    # default grupomusica
+    key_code = 'grupomusica' 
+
+    def queryset(self, request):
+        # override para solo mostrar los registros de Grupo Artistico de Musica
+        queryset = super(BasePromocionInline, self).queryset(request)\
+                    .filter(grupo__submodulo__code=self.key_code)
+
+        if not self.has_change_permission(request):
+            queryset = queryset.none()
+        return queryset
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        # override para sobreescribir el form field y agregar la clase CSS chozen
+        # para agregar el filtro en los combos
+        if db_field.name == 'grupo':
+            return forms.ModelChoiceField(
+                label=u'Seleccionar Grupo', 
+                queryset=Grupo.objects.filter(submodulo__code=self.key_code), 
+                widget=forms.Select(attrs={'class': 'chozen'})
+            )
+        return super(BasePromocionInline, self).formfield_for_dbfield(db_field, **kwargs)
 
 class RegistroMusicaInline(BasePromocionInline):
-    model = RegistroMusica    
-    verbose_name_plural = u'Registro grupo de música'
+    key_code = 'grupomusica'
+    verbose_name_plural = u'Grupo Musica'
 
 class RegistroTeatroInline(BasePromocionInline):
-    model = RegistroTeatro
-    verbose_name_plural = u'Registro grupo de teatro'
+    key_code = 'grupoteatro'
+    verbose_name_plural = u'Grupo de teatro'
 
 class RegistroDanzaInline(BasePromocionInline):
-    model = RegistroDanza
-    verbose_name_plural = u'Registro grupo de danza'
+    key_code = 'grupodanza'
+    verbose_name_plural = u'Grupo de danza'
 
 class RegistroCoroInline(BasePromocionInline):
-    model = RegistroCoro
-    verbose_name_plural = u'Registro grupo de coro'
+    key_code = 'grupocoro'
+    verbose_name_plural = u'Grupo de coro'
 
 class RegistroPinturaInline(BasePromocionInline):
-    model = RegistroPintura
-    verbose_name_plural = u'Registro grupo de pintura'
+    key_code = 'grupopintura'
+    verbose_name_plural = u'Grupo de pintura'
 
 # Programa VBG Interna
 class InscripcionPVBGInternaInline(admin.TabularInline):

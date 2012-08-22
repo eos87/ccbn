@@ -9,6 +9,7 @@ from django.db.models.fields.related import ForeignKey
 from sistema.models import Salida, Modulo, Estrategia
 from ccbn.utils import get_porcentaje
 from django.contrib.auth.decorators import login_required
+import datetime
 
 def testing(request):
     modulos = Modulo.objects.all()
@@ -59,7 +60,10 @@ def parse_filters(qs):
             key = filtro.field
 
         # validaciones para algunos tipos de datos: fechas, ...
-        dicc[key] = filtro.value
+        if 'datetime' in filtro.value:
+            dicc[key] = eval(filtro.value)
+        else:
+            dicc[key] = filtro.value
     
     return dicc
 
@@ -96,7 +100,12 @@ def parse_salida(salida):
     # verificando splits y obteniendo valores
     splits_dicc = {}
     for split in salida.querysplit_set.all():
-        sub_qs = query.filter(**{'%s%s' % (split.field, split.criteria):split.value})
+        if 'datetime' in split.value:
+            valor = eval(split.value)
+        else:
+            valor = split.value
+        sub_qs = query.filter(**{'%s%s' % (split.field, split.criteria):valor})
+        
         if split.tipo_meta == 1: # percent                
             splits_dicc[split.id] = get_porcentaje(query.count(), sub_qs.count())
         elif split.tipo_meta == 2: # count

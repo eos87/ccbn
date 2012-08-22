@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db import models
 from atencionintegral.models import generate_years_choice, START_YEAR
+from sistema.models import SubModulo
 
 class BasePromocion(models.Model):
     nombre = models.CharField(max_length=100)
@@ -72,3 +73,16 @@ class EventoColectivo(models.Model):
 
     class Meta:
         verbose_name_plural = u'Eventos Colectivos'
+
+class Grupo(models.Model):
+    nombre = models.CharField(max_length=100)
+    semestre = models.IntegerField(choices=((1, '1er Semestre'), (2, '2do Semestre')))
+    year = models.IntegerField('Año', choices=generate_years_choice(START_YEAR))
+    submodulo = models.ForeignKey(SubModulo, verbose_name = u'Tipo', 
+                                  limit_choices_to = {'parent_module__code': 'module4'})
+
+    def __unicode__(self):
+        return u'%s %s %s' % (self.nombre, self.get_semestre_display(), self.year)
+
+    class Meta:
+        verbose_name_plural = u'Grupos'
