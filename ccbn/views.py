@@ -58,6 +58,7 @@ def parse_filters(qs):
         else:
             key = filtro.field
 
+        # validaciones para algunos tipos de datos: fechas, ...
         dicc[key] = filtro.value
     
     return dicc

@@ -130,7 +130,7 @@ class ActividadColectiva(models.Model):
     acuerdos = models.TextField(blank=True, default='')
 
     def __unicode__(self):
-        return u'%s' % self.id
+        return u'%s %s' % (self.actividad.nombre, self.fecha)
 
     class Meta:
         verbose_name_plural = u'Actividades Colectivas'

@@ -183,7 +183,7 @@ class PersonaAdmin(admin.ModelAdmin):
     fieldsets = [
         ('Datos personales', {'fields': [('primer_nombre', 'segundo_nombre'), ('primer_apellido', 'segundo_apellido'), 
                                         ('sexo', 'fecha_nacimiento'), ('codigo', 'cedula')]}),
-        (u'Relación con CCBN', {'fields': [('docente', 'personal', 'alumno', 'visitante'), ('becado', 'promotor', 'beneficiario', 'integrante')]}),
+        (u'Relación con CCBN', {'fields': [('docente', 'personal', 'alumno', 'visitante'), ('becado', 'promotor', 'beneficiario', 'integrante'), 'acompanante']}),
         ('Ubicacion', {'fields': [('municipio', 'ciudad'), ('barrio'), 'direccion', ('telefono', 'celular')]}),
         (u'Información Académica', {'fields': [('nivel_academico', 'nivel_estudio'), 'centro_actual']}),
         ('Datos del Hogar', {'fields': ['oficio', 'con_quien_vive', 'tipo_familia',]}),

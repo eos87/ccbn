@@ -120,6 +120,7 @@ class Persona(models.Model):
     promotor = models.BooleanField()
     beneficiario = models.BooleanField(verbose_name=u'Beneficiario de programa')
     integrante = models.BooleanField(verbose_name=u'Integrante promoción artística')
+    acompanante = models.BooleanField(verbose_name=u'Acompañante')
     
     municipio = models.ForeignKey(Municipio)
     ciudad = ChainedForeignKey(
