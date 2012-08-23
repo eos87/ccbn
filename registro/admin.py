@@ -210,7 +210,7 @@ class PersonaAdmin(admin.ModelAdmin):
         (u'Relación con CCBN', {'fields': [('docente', 'personal', 'alumno', 'visitante'), ('becado', 'promotor', 'beneficiario', 'integrante'), 'acompanante']}),
         ('Ubicacion', {'fields': [('municipio', 'ciudad'), ('barrio'), 'direccion', ('telefono', 'celular')]}),
         (u'Información Académica', {'fields': [('nivel_academico', 'nivel_estudio'), 'centro_actual']}),
-        ('Datos del Hogar', {'fields': ['oficio', 'con_quien_vive', 'tipo_familia',]}),
+        ('Datos del Hogar', {'fields': [('tiene_hijos', 'oficio'), 'con_quien_vive', 'tipo_familia',]}),
         ('Jefe de Familia', {'fields': [('jefe_familia', 'j_oficio'), ('j_primer_nombre', 'j_segundo_nombre'), 
                                         ('j_primer_apellido', 'j_segundo_apellido')],})
                                                                                      
