@@ -157,7 +157,7 @@ class InscripcionPrevencionExterna(models.Model):
 
     proceso_formacion = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
     vulnerabilidad = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
-    comp = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
+    comp = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True, verbose_name=u'Competencia')
     autonomia = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
     accion_comunitaria = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
     respeto = models.IntegerField(choices=SI_NO_CHOICE, blank=True, null=True)
